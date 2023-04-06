@@ -1,0 +1,53 @@
+{
+    "files.autoSave": "afterDelay",
+    "workbench.colorTheme": "Dracula At Night",
+    "workbench.iconTheme": "material-icon-theme",
+    "material-icon-theme.activeIconPack": "nest",
+    "go.testOnSave": true,
+    "go.lintOnSave": "package",
+    "go.formatTool": "goimports",
+    "go.testFlags": ["-v"],
+    "[go]": {
+      "editor.formatOnSave": true,
+      "editor.codeActionsOnSave": {
+        "source.organizeImports": true
+      }
+    },
+    "[prisma]": {
+      "editor.formatOnSave": true
+    },
+  
+    "python.linting.enabled": true,
+    "python.linting.flake8Enabled": true,
+    "python.formatting.blackArgs": ["-l 79"],
+    "python.formatting.provider": "black",
+  
+    "code-runner.executorMap": {
+      "python": "python3 -u"
+    },
+    "code-runner.runInTerminal": true,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "[javascriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "gvm.pathToDefaultTerminal": "~/.gvm/scripts/gvm",
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "workbench.editor.untitled.hint": "hidden",
+    "mdb.confirmRunAll": false,
+    "[typescriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "debug.disassemblyView.showSourceCode": false,
+    "terminal.integrated.enableMultiLinePasteWarning": false,
+    "go.toolsManagement.autoUpdate": true,
+    "go.autocompleteUnimportedPackages": true,
+    "files.trimTrailingWhitespace": true,
+    "editor.formatOnSave": true,
+    "[jsonc]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+  }
