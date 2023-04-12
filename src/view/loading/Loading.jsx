@@ -1,7 +1,9 @@
+import { Fragment } from "react";
+
 export default function Loading() {
   return (
-    <div>
+    <Fragment>
       Loading...
-    </div>
+    </Fragment>
   )
 }

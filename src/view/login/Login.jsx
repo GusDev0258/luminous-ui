@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -12,7 +12,7 @@ import useToken from "../app/useToken";
        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
- 
+
       body: JSON.stringify(credentials)
     })
     .then((data) => data.json());
@@ -24,7 +24,7 @@ export default function Login() {
   const [unauthorized, setUnauthorized] = useState(false);
   const { setToken } = useToken();
   const navigate = useNavigate();
-  
+
   const schema = yup.object().shape({
     email: yup.string()
     .required("Você deve preencher todos os campos")
@@ -45,8 +45,8 @@ export default function Login() {
         redirectTo();
       } else {
         setUnauthorized(true);
-      }  
-    
+      }
+
   }
 
     return(
@@ -62,7 +62,7 @@ export default function Login() {
           </label>
           <label>
             senha
-            <input type="password" 
+            <input type="password"
             {...register("password")}
              />
             {errors.password && <p>{errors.password.message}</p>}

@@ -13,7 +13,7 @@ export default function WhiteTax() {
   const [selectedItem, setSelectedItem] = useState("");
   const [company, setCompany] = useState(
     {
-    companyName: 
+    companyName:
     "Amazonas Energia",
     endHourHighPrice:"23:00",
     endHourLowPrice:"18:30",
@@ -52,7 +52,7 @@ export default function WhiteTax() {
        .then(data => data.json())
        setCompany(data[0]);
        setWhiteTaxes({whiteTaxes: data});
-  
+
   }
 
   const searchForExpecificCompany = (companyName) => {
@@ -63,9 +63,9 @@ export default function WhiteTax() {
     const [companyData] = searchForExpecificCompany(e.target.value);
     setCompany(companyData);
     setSelectedItem(e.target.value);
-    
+
   }
-  
+
   // eslint-disable-next-line array-callback-return, react-hooks/exhaustive-deps
   const convertToHour = (hour) => {
     return hour === '00:00' ? '23:59' : hour;
@@ -78,15 +78,15 @@ export default function WhiteTax() {
       const betweenInitialMiddlePrice = hour >= companyy.initialStartHourMiddlePrice  && hour < companyy.initialEndHourMiddlePrice;
       const betweenFinalMiddlePrice = hour >= companyy.finalStartHourMiddlePrice && hour < convertToHour(companyy.finalEndHourMiddlePrice);
       let price;
-      
+
         if(betweenHighPrice) {
           price = companyy.highPrice;
-          
+
         } else if(betweenInitialMiddlePrice || betweenFinalMiddlePrice){
           price = companyy.middlePrice;
-      
+
         } else {
-          price = companyy.lowPricex;
+          price = companyy.lowPrice;
     }
 
     updatedPrices[index] = price;
@@ -97,7 +97,7 @@ export default function WhiteTax() {
 
   useEffect(() => {
     loadGraph(company);
-  }, [company]) 
+  }, [company])
 
   if(!whiteTaxes) {
     getWhiteTaxes(token);
@@ -127,7 +127,7 @@ export default function WhiteTax() {
             ],
           }} />
      </div>
-      
+
     </div>
   ) }
 }
