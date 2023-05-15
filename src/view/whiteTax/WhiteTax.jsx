@@ -11,28 +11,7 @@ export default function WhiteTax() {
   const {whiteTaxes, setWhiteTaxes} = useWhiteTax();
   const {token} = useToken();
   const [selectedItem, setSelectedItem] = useState("");
-  const [company, setCompany] = useState(
-    {
-    companyName:
-    "Amazonas Energia",
-    endHourHighPrice:"23:00",
-    endHourLowPrice:"18:30",
-    finalEndHourMiddlePrice:
-    "00:00",
-    finalStartHourMiddlePrice:"23:00",
-    highPrice:1.615,
-    initialEndHourMiddlePrice:"20:00",
-    initialStartHourMiddlePrice:"19:00",
-    lowPrice: 0.709,
-    middlePrice:1.07,
-    regularPrice:
-    0.835,
-    save:
-    0.12,
-    startHourHighPrice:"20:00",
-    startHourLowPrice:
-    "00:00"}
-    );
+  const [company, setCompany] = useState({});
   const [prices, setPrices] = useState([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
   const labels = ['00:00', '00:30', '01:00', '01:30', '02:00', '02:30', '03:00', '03:30', '04:00', '04:30'
   , '05:00', '05:30', '06:00', '06:30', '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30'
@@ -56,7 +35,7 @@ export default function WhiteTax() {
   }
 
   const searchForExpecificCompany = (companyName) => {
-    return whiteTaxes.filter((whiteTax) => whiteTax.companyName === companyName);
+    return whiteTaxes.filter((whiteTax) => whiteTax.energyProvider.companyName === companyName);
   }
 
   const handleChange = (e) => {
@@ -109,7 +88,7 @@ export default function WhiteTax() {
         <form>
         <select onChange={(e) => handleChange(e)} name="teste" value={selectedItem}>
         {whiteTaxes.map((whiteTax, index) =>
-          <option value={whiteTax.companyName} key={index}>{whiteTax.companyName}</option>
+          <option value={whiteTax.energyProvider.companyName} key={index}>{whiteTax.energyProvider.companyName}</option>
         )}
         </select>
         </form>
