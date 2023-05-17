@@ -1,0 +1,10 @@
+
+.logo{
+  margin-top: 2rem;
+}
+img[alt="deco"]{
+  position: absolute;
+  bottom: 0px;
+  z-index: -2;
+  width: 120%;
+}
