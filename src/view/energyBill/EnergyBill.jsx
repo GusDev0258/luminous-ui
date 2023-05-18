@@ -2,9 +2,25 @@ import React from "react";
 import DefaultInput from "../utils/form/DefaultInput";
 import { MagnifyingGlass, List, Flag } from "@phosphor-icons/react";
 import Header from "../utils/Header";
+import axios from "axios";
 
 const EnergyBill = () => {
   const [search, setSearch] = React.useState("");
+    const [energyBills, setEnergyBills] = React.useState([]);
+
+    React.useEffect(() =>{
+      requestAllEnergyBills();
+    },[]);
+
+  const requestAllEnergyBills = async () =>{
+    try{
+      const response = await axios.get("http://localhost:8080/api/energyBill/getAllEnergyBills");
+      setEnergyBills(response.data);
+      console.log(response.data);
+    }catch(error){
+      console.log(error);
+    }
+  };
 
   function handleSearch({ target }) {}
 
@@ -25,7 +41,7 @@ const EnergyBill = () => {
           <MagnifyingGlass size={16} className="search-icon" color="#482803" />
         </form>
       </section>
-      {search}
+
     </div>
   );
 };
