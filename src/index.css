@@ -4,6 +4,7 @@
 @import "./css/Form/Title.css";
 @import "./css/Utils/Logo.css";
 @import "./css/Utils/Button.css";
+@import "./css/Utils/Header.css";
 
 body {
   margin: 0;
@@ -12,6 +13,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #FAFAFA;
 }
 
 code {

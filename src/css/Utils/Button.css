@@ -15,3 +15,8 @@
 .primary-button:hover{
   background-color: #464646;
 }
+.icon-button{
+  background-color: transparent;
+  border: none;
+  padding: 4px;
+}

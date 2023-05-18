@@ -1,5 +1,5 @@
 .default-form-input{
-  width: 64vw;
+  width: 72vw;
   height: 1vh;
   padding: 1rem;
   border: 1px solid #CA8A04;
@@ -9,4 +9,18 @@
   border-radius: 4px;
   font-family: 'Lato', Arial, Helvetica, sans-serif;
   font-size: 1rem;
+  position: relative;
+  text-align: left;
+  display: flex;
+  align-items: center;
+}
+.default-form-input::placeholder{
+  color: #40404058;
+}
+.default-form-input.search-input{
+  margin-bottom: 0px; 
+}
+.search-icon{
+  position: absolute;
+  right: 16vw;
 }
