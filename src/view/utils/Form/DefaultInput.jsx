@@ -1,23 +1,21 @@
-import React from 'react'
+import React from "react";
 
-const DefaultInput = ({labelText, labelClass, inputClass, inputId, inputName, inputType,handleChange, registerFor,...props }) => {
-  
-
+const DefaultInput = ({ type, label, id, value, setValue, ...props }) => {
+  function handleChange({ target }) {
+    setValue(target.value);
+  }
   return (
-    <div>
-    <label htmlFor={inputId} className={labelClass ? labelClass : 'control-label'}>
-      {labelText}
-    </label>
-    <input 
-      className={inputClass ? inputClass : 'default-form-input'}
-      id={inputId}
-      name={inputName}
-      type={inputType}
-      onChange={handleChange}
-      {...props}
-    />
-    </div>
-  )
-}
+    <>
+      <label htmlFor={id}>{label}</label>
+      <input
+        id={id}
+        type={type}
+        value={value}
+        onChange={handleChange}
+        {...props}
+      />
+    </>
+  );
+};
 
-export default DefaultInput
+export default DefaultInput;
