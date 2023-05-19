@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { MagnifyingGlass, PlusCircle } from "@phosphor-icons/react";
 import Header from "../utils/Header";
 import axios from "axios";
-import moment from "moment";
 import errorImage from "../../images/noRegistersImage.svg";
 import EnergyBillItem from "./EnergyBillItem";
 import energyBillImageDeco from "../../images/decoEnergyBill.svg";
@@ -18,7 +17,7 @@ const EnergyBill = () => {
     state: true,
   });
   const navigate = useNavigate();
-  const redirectTo = () => navigate("/energyBill/cadastro");
+  const redirectToRegister = () => navigate("/energyBill/cadastro");
   React.useEffect(() => {
     requestAllEnergyBills();
   }, []);
@@ -48,8 +47,6 @@ const EnergyBill = () => {
     }
   };
 
-  function handleSearch({ target }) {}
-  function handleClick() {}
 
   return (
     <div>
@@ -90,7 +87,6 @@ const EnergyBill = () => {
 
         {energyBills.length > 0 && (
           <ul className="energyBills-list">
-            
             {energyBills.map((energyBill) => (
               <EnergyBillItem
                 address={energyBill.address}
@@ -114,7 +110,7 @@ const EnergyBill = () => {
         <button
           className="primary-button btn-cadastrar"
           type="button"
-          onClick={redirectTo}
+          onClick={redirectToRegister}
         >
           <PlusCircle size={24} />
           Cadastrar Fatura
