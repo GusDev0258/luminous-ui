@@ -11,6 +11,10 @@
   margin-bottom: 1.5rem;
   margin-top: 1rem;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 .primary-button:hover{
   background-color: #464646;
@@ -19,4 +23,16 @@
   background-color: transparent;
   border: none;
   padding: 4px;
+}
+.btn-cadastrar{
+  font-size: 1.2rem;
+}
+.btn-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+.btn-fatura{
+  width: 100%;
 }

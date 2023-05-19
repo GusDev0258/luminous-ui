@@ -1,0 +1,51 @@
+.eneryBills-container{
+  margin-top: 1.275rem;
+  width: max(100vw - 10px);
+  height: 60vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+.eneryBills-item::after{
+  content: '';
+  width: 100%;
+  position: absolute;
+  display: block;
+  bottom: 8px;
+  background-color: #D9D9D9;
+}
+.energyBils-item{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 70%;
+}
+.energyBills-list{
+  width: 100%;
+  height: 53%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-y: scroll;
+}
+.energyBill-address{
+  font-size: 0.875rem;
+  color: #84CC16;
+  font-family: 'Poppins', Georgia, 'Times New Roman', Times, serif;
+}
+.energyBill-dueDate{
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  font-family: 'Lato', Arial, Helvetica, sans-serif;
+}
+.energyBill-consumption{
+  margin-top: 0.25rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  font-family: 'Lato', Arial, Helvetica, sans-serif;
+  color: #26262650;
+}

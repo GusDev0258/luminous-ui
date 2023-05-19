@@ -10,6 +10,7 @@ import CadUser from './view/cadUser/CadUser';
 import WhiteTax from './view/whiteTax/WhiteTax';
 import AuthVerify from './view/auth/AuthVerify';
 import EnergyBill from './view/energyBill/EnergyBill';
+import EnergyBillCadastro from './view/energyBill/EnergyBillCadastro';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -21,6 +22,7 @@ root.render(
       <Route path="/register" element={<CadUser/>}/>
       <Route path="/white-taxes" element={<WhiteTax/>}/>
       <Route path="/energyBill" element={<EnergyBill/>}/>
+      <Route path="/energyBill/cadastro" element={<EnergyBillCadastro/>}/>
     </Routes>
     <AuthVerify/>
   </BrowserRouter>
