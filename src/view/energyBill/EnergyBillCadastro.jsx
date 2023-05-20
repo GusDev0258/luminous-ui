@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../utils/Header";
 import DefaultInput from "../utils/form/DefaultInput";
+import axios from 'axios';
 
 
 const EnergyBillCadastro = () => {
@@ -11,16 +12,41 @@ const EnergyBillCadastro = () => {
   const [dueDate, setDueDate] = React.useState("");
   const [file, setFile] = React.useState();
   
-  
-  function handleFile({target}){
-    console.log(target.value);
+  const handleFile = ({target}) =>{
+    setFile(target.files[0]);
+  }
+  const handleFileUpload = async (event) => {
+    event.preventDefault();
+
+    
+
+    const formData = new FormData();
+
+    formData.append('file', file);
+
+    const token = JSON.parse(window.sessionStorage.getItem("token"));
+
+      const response = await axios.post(
+        "http://localhost:8080/api/billFile/upload", formData,
+        {
+          headers: {
+            authorization: `Bearer ${token.token}`,
+            Accept: "multipart/form-data",
+            "Content-type": "multipart/form-data",
+          },
+        }
+      );
+    console.log(response);
+  }
+
+  function handleSubmit(){
+
   }
 
   return (
     <div>
       <Header textContent="Cadastrar Fatura" />
       <section className="default-form-container">
-        <form className="form-container" encType="multipart/data">
         <DefaultInput
           label={"Data de Referência"}
           labelClassName={"default-input-label"}
@@ -66,11 +92,12 @@ const EnergyBillCadastro = () => {
           value={dueDate}
           setValue={setDueDate}
         />
+        <form encType="multipart/form-data" onSubmit={handleFileUpload} method="POST">
         <input type="file" id="documentBillPath" name="documentBillPath" className="default-input-file" onChange={handleFile}/>
-        <button className="primary-button btn-fatura">
+        <button type="submit"className="primary-button btn-fatura">
           Cadastrar
         </button>
-      </form>
+        </form>
       </section>
     </div>
   );

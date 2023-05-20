@@ -21,3 +21,4 @@
   color: #fff;
   font-family: 'Poppins', Georgia, 'Times New Roman', Times, serif;
 }
+/* <form className="form-container" encType="multipart/form-data" onSubmit={handleSubmit}> */
