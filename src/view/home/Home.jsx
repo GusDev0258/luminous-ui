@@ -1,16 +1,15 @@
-// import useAddress from "../../states/useAddress";
-import SnackBar from "../weather-notifaction/SnackBar";
+import { useContext, useEffect } from "react";
+import { getAddressByUser } from "../../api/FetchAddress";
+import useToken from "../app/useToken";
+import { AddressContext } from "../../states/AddressContext";
 
 export default function Home() {
-  // const {hasAddress,setHasAddress} = useAddress();
-  cont 
+  const {token, payload} = useToken();
+  const {setHasAddress} = useContext(AddressContext);
 
   return (
     <div>
       <h1>Home!</h1>
-      <button onClick={() => setHasAddress(true)}>ativar</button>
-      <button onClick={() => setHasAddress(false)}>desativar</button>
-
     </div>
   );
 }

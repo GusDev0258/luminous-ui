@@ -4,8 +4,7 @@ import 'chart.js/auto';
 import { Chart } from 'react-chartjs-2';
 import { useEffect, useState } from "react";
 import Loading from '../loading/Loading';
-
-
+import { getWhiteTaxes } from "../../api/FetchWhiteTaxes";
 
 export default function WhiteTax() {
   const {whiteTaxes, setWhiteTaxes} = useWhiteTax();
@@ -19,20 +18,7 @@ export default function WhiteTax() {
   , '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30'
   , '23:00', '23:30'];
 
-  const getWhiteTaxes = async (token) => {
-     let data = await fetch('http://localhost:8080/api/white-taxes/', {
-       method: 'GET',
-       headers: {
-        Accept: 'application/json',
-        'Authorization':`Bearer ${token}`,
-        'Content-Type': 'application/json',
-       },
-     })
-       .then(data => data.json())
-       setCompany(data[0]);
-       setWhiteTaxes({whiteTaxes: data});
 
-  }
 
   const searchForExpecificCompany = (companyName) => {
     return whiteTaxes.filter((whiteTax) => whiteTax.energyProvider.companyName === companyName);
@@ -79,14 +65,16 @@ export default function WhiteTax() {
   }, [company])
 
   if(!whiteTaxes) {
-    getWhiteTaxes(token);
+    const data = getWhiteTaxes(token);
+    setCompany(data[0]);
+      setWhiteTaxes({whiteTaxes: data});
     return <Loading/>
   } else {
   return (
     <div>
       <div>
         <form>
-        <select onChange={(e) => handleChange(e)} name="teste" value={selectedItem}>
+        <select onChange={(e) => handleChange(e)} name="white-taxes" value={selectedItem}>
         {whiteTaxes.map((whiteTax, index) =>
           <option value={whiteTax.energyProvider.companyName} key={index}>{whiteTax.energyProvider.companyName}</option>
         )}

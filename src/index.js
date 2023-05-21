@@ -10,23 +10,26 @@ import CadUser from './view/cadUser/CadUser';
 import WhiteTax from './view/whiteTax/WhiteTax';
 import AuthVerify from './view/auth/AuthVerify';
 import SnackBar from './view/weather-notifaction/SnackBar';
-import Context from './Context';
+import CadAddress from './view/cadAddress/CadAddress';
+import { AddressContextProvider } from './states/AddressContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <Context.Provider>
+
   <BrowserRouter>
+    <AddressContextProvider>
     <Routes>
-      <Route path="/" element={<App />}/>
       <Route path="/login" element={<Login />}/>
-      <Route path="/home" element={<Home />}/>
       <Route path="/register" element={<CadUser/>}/>
+      <Route path="/" element={<App />}/>
+      <Route path="/home" element={<Home />}/>
+      <Route path="/register-address" element={<CadAddress/>}/>
       <Route path="/white-taxes" element={<WhiteTax/>}/>
     </Routes>
     <AuthVerify/>
     <SnackBar/>
+    </AddressContextProvider>
   </BrowserRouter>
-  </Context.Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
