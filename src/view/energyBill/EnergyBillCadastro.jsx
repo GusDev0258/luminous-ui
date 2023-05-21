@@ -1,47 +1,69 @@
 import React from "react";
 import Header from "../utils/Header";
 import DefaultInput from "../utils/form/DefaultInput";
-import axios from 'axios';
-
+import axios from "axios";
+import useToken from '../app/useToken';
 
 const EnergyBillCadastro = () => {
-  const [date, setDate] = React.useState("");
+  const [referenceDate, setReferenceDate] = React.useState("");
   const [address, setAddress] = React.useState();
   const [consumptionReais, setConsumptionReais] = React.useState();
   const [consumptionkWh, setConsumptionkWh] = React.useState();
   const [dueDate, setDueDate] = React.useState("");
   const [file, setFile] = React.useState();
+  const [fileId, setFileId] = React.useState();
+  const [addressId, setAddressId] = React.useState();
+  const {token} = useToken();
   
-  const handleFile = ({target}) =>{
+  React.useEffect(() =>{
+    console.log(token);
+  }, [token]);
+
+  const handleFile = ({ target }) => {
     setFile(target.files[0]);
-  }
+  };
   const handleFileUpload = async (event) => {
     event.preventDefault();
 
-    
-
     const formData = new FormData();
 
-    formData.append('file', file);
+    formData.append("file", file);
 
-    const token = JSON.parse(window.sessionStorage.getItem("token"));
 
-      const response = await axios.post(
-        "http://localhost:8080/api/billFile/upload", formData,
-        {
-          headers: {
-            authorization: `Bearer ${token.token}`,
-            Accept: "multipart/form-data",
-            "Content-type": "multipart/form-data",
-          },
-        }
-      );
-    console.log(response);
-  }
+    const response = await axios.post(
+      "http://localhost:8080/api/billFile/upload",
+      formData,
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+          Accept: "application/json",
+          "Content-type": "multipart/form-data",
+        },
+      }
+    );
+    await setFileId(response.data);
+  };
 
-  function handleSubmit(){
-
-  }
+  const handleSubmit = async (event) => {
+    await handleFileUpload(event);
+    await axios.post(
+      `http://localhost:8080/api/energyBill/address/${addressId}/billFile/${fileId}`,
+      {
+        referenceDate,
+        dueDate,
+        consumptionReais,
+        consumptionkWh,
+        fileId
+      },
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+          Accept: "application/json",
+          "Content-type": "application/json",
+        },
+      }
+    );
+  };
 
   return (
     <div>
@@ -53,8 +75,8 @@ const EnergyBillCadastro = () => {
           className="reference-date-input default-form-input"
           id="referenceDate"
           type="date"
-          value={date}
-          setValue={setDate}
+          value={referenceDate}
+          setValue={setReferenceDate}
         />
         <DefaultInput
           label={"Residência da Fatura"}
@@ -92,11 +114,21 @@ const EnergyBillCadastro = () => {
           value={dueDate}
           setValue={setDueDate}
         />
-        <form encType="multipart/form-data" onSubmit={handleFileUpload} method="POST">
-        <input type="file" id="documentBillPath" name="documentBillPath" className="default-input-file" onChange={handleFile}/>
-        <button type="submit"className="primary-button btn-fatura">
-          Cadastrar
-        </button>
+        <form
+          encType="multipart/form-data"
+          onSubmit={handleFileUpload}
+          method="POST"
+        >
+          <input
+            type="file"
+            id="documentBillPath"
+            name="documentBillPath"
+            className="default-input-file"
+            onChange={handleFile}
+          />
+          <button type="submit" className="primary-button btn-fatura">
+            Cadastrar
+          </button>
         </form>
       </section>
     </div>

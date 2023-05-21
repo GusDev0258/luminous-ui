@@ -18,6 +18,7 @@ const EnergyBill = () => {
   });
   const navigate = useNavigate();
   const redirectToRegister = () => navigate("/energyBill/cadastro");
+
   React.useEffect(() => {
     requestAllEnergyBills();
   }, []);
@@ -27,7 +28,7 @@ const EnergyBill = () => {
       const token = JSON.parse(window.sessionStorage.getItem("token"));
 
       const response = await axios.get(
-        "http://localhost:8080/api/energyBill/getAllEnergyBills",
+        "http://localhost:8080/api/energyBill/getAll/10",
         {
           headers: {
             authorization: `Bearer ${token.token}`,
@@ -89,7 +90,7 @@ const EnergyBill = () => {
           <ul className="energyBills-list">
             {energyBills.map((energyBill) => (
               <EnergyBillItem
-                address={energyBill.address}
+                address={energyBill.address.houseNumber}
                 dueDate={energyBill.dueDate}
                 consumptionReais={energyBill.energyConsumptionReais}
                 consumptionkWh={energyBill.energyConsumption_kWh}
