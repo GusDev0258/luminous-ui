@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import jwt from 'jwt-decode';
 
 export default function useToken() {
   const getToken = () => {
@@ -14,8 +15,14 @@ export default function useToken() {
     setToken(userToken.token);
   };
 
+  const getPayload = () => {
+    if (token)
+      return jwt(token);
+  }
+
   return {
     setToken: saveToken,
-    token
+    token,
+    payload: getPayload()
   }
 }

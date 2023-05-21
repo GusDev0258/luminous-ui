@@ -2,21 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { registerUser } from "../../api/FetchUser";
 import * as yup from "yup";
 import useToken from "../app/useToken";
-
-async function request(data) {
-  return fetch('http://localhost:8080/api/auth/register', {
-    method: 'POST',
-    headers: {
-     Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-
-    body: JSON.stringify(data.payload)
-  })
-    .then(data => data.json());
-}
 
 export default function CadUser() {
   const { setToken } = useToken();
@@ -51,8 +39,8 @@ export default function CadUser() {
     setPhone(value)
   }
 
-  const registerUser = async payload => {
-    const token = await request({
+  const doRequest = async payload => {
+    const token = await registerUser({
       payload
     });
     if(token) {
@@ -69,7 +57,7 @@ export default function CadUser() {
     <div>
       <h1>Junte-se a nós</h1>
       <div>
-        <form onSubmit={handleSubmit(e => registerUser(e))}>
+        <form onSubmit={handleSubmit(e => doRequest(e))}>
           <label>
             <p>Nome</p>
             <input type="text" {...register("name")}/>

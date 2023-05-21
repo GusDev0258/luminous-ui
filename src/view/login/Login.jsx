@@ -1,24 +1,10 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { loginUser } from "../../api/FetchUser";
 import * as yup from "yup";
 import useToken from "../app/useToken";
-
- async function loginUser(credentials) {
-    const response = await fetch('http://localhost:8080/api/auth/authenticate', {
-      method: 'POST',
-      headers: {
-       Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-
-      body: JSON.stringify(credentials)
-    })
-    .then((data) => data.json());
-
-    return response;
- }
 
 export default function Login() {
   const [unauthorized, setUnauthorized] = useState(false);
@@ -36,13 +22,13 @@ export default function Login() {
     resolver: yupResolver(schema),
   });
 
-  const redirectTo = () => navigate("/home");
+  const redirectToHome = () => navigate("/home");
 
   const login = async (userData) => {
     const data = await loginUser(userData);
       if (data?.token) {
         setToken(data);
-        redirectTo();
+        redirectToHome();
       } else {
         setUnauthorized(true);
       }
