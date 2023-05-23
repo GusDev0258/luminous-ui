@@ -1,0 +1,33 @@
+.default-form-container{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5rem;
+}
+.form-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.control-label{
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  font-family: 'Poppins', Georgia, 'Times New Roman', Times, serif;
+  margin-bottom: 4px;
+}
+.default-info-message{
+  font-weight: 500;
+  padding: 8px;
+}
+.default-info-message a{
+  color: #713F12;
+}

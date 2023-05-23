@@ -1,0 +1,38 @@
+.primary-button{
+  padding: 8px 24px;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: 'Lato', Arial, Helvetica, sans-serif;
+  background-color: #262626;
+  color: #FAFAFA;
+  border: 1px solid #121212;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  margin-top: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.primary-button:hover{
+  background-color: #464646;
+}
+.icon-button{
+  background-color: transparent;
+  border: none;
+  padding: 4px;
+}
+.btn-cadastrar{
+  font-size: 1.2rem;
+}
+.btn-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+.btn-fatura{
+  width: 100%;
+}

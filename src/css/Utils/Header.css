@@ -1,0 +1,16 @@
+.default-page-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 1.5rem;
+  position: relative;
+}
+.default-page-header::after{
+  content: '';
+  width: 100%;
+  height: 1px;
+  margin-top: 4px;
+  background-color: #FACC15;
+  position: absolute;
+  top: 2rem;
+}

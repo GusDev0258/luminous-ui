@@ -1,0 +1,24 @@
+.home-nav-list {
+  margin-top: 2rem;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-nav-list li button{
+  position: relative;
+}
+
+.img-home-text {
+  position: absolute;
+  bottom: 16px;
+  left: 12px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+  font-family: 'Poppins', Georgia, 'Times New Roman', Times, serif;
+}
+/* <form className="form-container" encType="multipart/form-data" onSubmit={handleSubmit}> */
