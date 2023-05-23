@@ -19,6 +19,7 @@ export default function Home() {
 
   React.useEffect(() => {
     fetchData();
+    console.log(payload);
   },[]);
 
   const fetchData = async () => {
