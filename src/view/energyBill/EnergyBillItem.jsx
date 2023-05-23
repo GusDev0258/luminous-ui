@@ -1,9 +1,9 @@
 import React from 'react'
 
-const EnergyBillItem = ({address, dueDate, consumptionReais, consumptionkWh, ...props}) => {
+const EnergyBillItem = ({id,address, dueDate, consumptionReais, consumptionkWh, ...props}) => {
   return (
     <>  
-    <li className="default-item">
+    <li className="default-item" key={id} id={id}>
     <span className="default-item-title-text">{address}</span>
     <span className="default-item-main-text">Fatura - {dueDate}</span>
     <span className="default-item-footer-text">

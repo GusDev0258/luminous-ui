@@ -22,7 +22,7 @@ const EnergyBill = () => {
   const { token } = useToken();
   const [address, setAddress] = useAddress();
   const [loading, setLoading] = React.useState(true);
-  
+
   React.useEffect(() => {
     async function requestAllEnergyBills() {
       try {
@@ -105,7 +105,7 @@ const EnergyBill = () => {
                 dueDate={energyBill.dueDate}
                 consumptionReais={energyBill.energyConsumptionReais}
                 consumptionkWh={energyBill.energyConsumption_kWh}
-                key={energyBill.id}
+                id={energyBill.id}
               />
             ))}
           </ul>
