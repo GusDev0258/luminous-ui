@@ -3,10 +3,10 @@ import React from 'react'
 const EnergyBillItem = ({address, dueDate, consumptionReais, consumptionkWh, ...props}) => {
   return (
     <>  
-    <li className="energyBils-item">
-    <span className="energyBill-address">{address}</span>
-    <span className="energyBill-dueDate">Fatura - {dueDate}</span>
-    <span className="energyBill-consumption">
+    <li className="default-item">
+    <span className="default-item-title-text">{address}</span>
+    <span className="default-item-main-text">Fatura - {dueDate}</span>
+    <span className="default-item-footer-text">
       R${consumptionReais} -{" "}
       {consumptionkWh}kWh
     </span>

@@ -5,7 +5,7 @@
 @import "./css/Utils/Logo.css";
 @import "./css/Utils/Button.css";
 @import "./css/Utils/Header.css";
-@import "./css/EnergyBill/EnergyBillItem.css";
+@import "./css/Utils/DefaultItem.css";
 @import './css/Home/Home.css';
 body {
   margin: 0;

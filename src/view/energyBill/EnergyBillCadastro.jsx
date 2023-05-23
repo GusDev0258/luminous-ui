@@ -3,32 +3,34 @@ import Header from "../utils/Header";
 import DefaultInput from "../utils/form/DefaultInput";
 import axios from "axios";
 import useToken from '../app/useToken';
+import useAddress from "../utils/useAddress";
+import { useNavigate } from "react-router-dom";
 
 const EnergyBillCadastro = () => {
   const [referenceDate, setReferenceDate] = React.useState("");
-  const [address, setAddress] = React.useState();
-  const [consumptionReais, setConsumptionReais] = React.useState();
-  const [consumptionkWh, setConsumptionkWh] = React.useState();
+  const [energyConsumptionReais, setEnergyConsumptionReais] = React.useState("");
+  const [energyConsumption_kWh, setEnergyConsumption_kWh] = React.useState("");
   const [dueDate, setDueDate] = React.useState("");
   const [file, setFile] = React.useState();
   const [fileId, setFileId] = React.useState();
-  const [addressId, setAddressId] = React.useState();
+  const [address, setAddress] = useAddress();
   const {token} = useToken();
+  const navigate = useNavigate();
   
   React.useEffect(() =>{
-    console.log(token);
-  }, [token]);
+    if(file){
+      handleFileUpload();
+    }
+  }, [file]);
 
-  const handleFile = ({ target }) => {
+  const handleFile = async ({ target }) => {
     setFile(target.files[0]);
   };
-  const handleFileUpload = async (event) => {
-    event.preventDefault();
+  const handleFileUpload = async () => {
 
     const formData = new FormData();
 
     formData.append("file", file);
-
 
     const response = await axios.post(
       "http://localhost:8080/api/billFile/upload",
@@ -41,18 +43,19 @@ const EnergyBillCadastro = () => {
         },
       }
     );
+    console.log(response);
     await setFileId(response.data);
   };
 
   const handleSubmit = async (event) => {
-    await handleFileUpload(event);
+    event.preventDefault();
     await axios.post(
-      `http://localhost:8080/api/energyBill/address/${addressId}/billFile/${fileId}`,
+      `http://localhost:8080/api/energyBill/address/${address}/billFile/${fileId}`,
       {
         referenceDate,
         dueDate,
-        consumptionReais,
-        consumptionkWh,
+        energyConsumptionReais,
+        energyConsumption_kWh,
         fileId
       },
       {
@@ -62,13 +65,18 @@ const EnergyBillCadastro = () => {
           "Content-type": "application/json",
         },
       }
-    );
+    ).then(() => navigate(`/energyBill/?address=${address}`));
   };
 
   return (
     <div>
       <Header textContent="Cadastrar Fatura" />
       <section className="default-form-container">
+      <form
+          encType="multipart/form-data"
+          onSubmit={handleSubmit}
+          accept={".pdf"}
+        >
         <DefaultInput
           label={"Data de Referência"}
           labelClassName={"default-input-label"}
@@ -92,18 +100,18 @@ const EnergyBillCadastro = () => {
           labelClassName={"default-input-label"}
           className="consumptionReais-input default-form-input"
           id="consumptionReais"
-          type="number"
-          value={consumptionReais}
-          setValue={setConsumptionReais}
+          type="text"
+          value={energyConsumptionReais}
+          setValue={setEnergyConsumptionReais}
         />
         <DefaultInput
           label={"Consumo em kWh"}
           labelClassName={"default-input-label"}
           className="consumptionkWh-input default-form-input"
           id="consumptionkWh"
-          type="number"
-          value={consumptionkWh}
-          setValue={setConsumptionkWh}
+          type="text"
+          value={energyConsumption_kWh}
+          setValue={setEnergyConsumption_kWh}
         />
         <DefaultInput
           label={"Data de Vencimento"}
@@ -114,11 +122,6 @@ const EnergyBillCadastro = () => {
           value={dueDate}
           setValue={setDueDate}
         />
-        <form
-          encType="multipart/form-data"
-          onSubmit={handleFileUpload}
-          method="POST"
-        >
           <input
             type="file"
             id="documentBillPath"

@@ -21,8 +21,8 @@ root.render(
       <Route path="/home" element={<Home />}/>
       <Route path="/register" element={<CadUser/>}/>
       <Route path="/white-taxes" element={<WhiteTax/>}/>
-      <Route path="/energyBill" element={<EnergyBill/>}/>
-      <Route path="/energyBill/cadastro" element={<EnergyBillCadastro/>}/>
+      <Route path="/energyBill/" element={<EnergyBill/>}/>
+      <Route path="/energyBill/cadastro/" element={<EnergyBillCadastro/>}/>
     </Routes>
     <AuthVerify/>
   </BrowserRouter>

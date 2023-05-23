@@ -50,4 +50,5 @@ img{
 }
 .root{
 	background-color: #FAFAFA;
+	box-sizing: border-box;
 }
