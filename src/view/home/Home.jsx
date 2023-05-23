@@ -42,7 +42,7 @@ export default function Home() {
 
   return (
     <div>
-      <Header textContent={"Pra onde ir?"} />
+      <Header textContent={"Minhas Residências"} />
       <section className="default-item-container">
       {addresses !== [] && (
       <nav className="default-item-nav">
