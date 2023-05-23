@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../utils/Header";
-import DefaultInput from "../utils/form/DefaultInput";
+import DefaultInput from '../utils/Form/DefaultInput';
 import axios from "axios";
 import useToken from '../app/useToken';
 import useAddress from "../utils/useAddress";

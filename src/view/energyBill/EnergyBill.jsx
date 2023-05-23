@@ -1,5 +1,5 @@
 import React from "react";
-import DefaultInput from "../utils/form/DefaultInput";
+import DefaultInput from '../utils/Form/DefaultInput';
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { MagnifyingGlass, PlusCircle } from "@phosphor-icons/react";
 import Header from "../utils/Header";

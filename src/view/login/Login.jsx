@@ -43,7 +43,7 @@ export default function Login() {
       } else {
         setUnauthorized(true);
       }
-
+    }
   return (
     <div className="default-form-container">
       <img src={logo} alt="logo" className="logo"/>
@@ -70,5 +70,4 @@ export default function Login() {
       <img src={abstractVector} alt="deco"/>
     </div>
   );
-}
 }
