@@ -34,7 +34,7 @@ root.render(
     </Routes>
     </CurrentAddressProvider>
     <AuthVerify/>
-    <SnackBar/>
+    {/* <SnackBar/> */}
     </AddressContextProvider>
   </BrowserRouter>
 );

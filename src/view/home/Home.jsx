@@ -5,25 +5,23 @@ import useToken from "../app/useToken";
 import { AddressContext } from "../../states/AddressContext";
 import { CurrentAddressContext } from "../../states/CurrentAddressContext";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import useAddress from "../utils/useAddress";
 
 import Header from "../utils/Header";
 import DefaultItem from "./AddressItem";
 
 export default function Home() {
   const { token, payload } = useToken();
-  const { setHasAddress } = useContext(AddressContext);
+  // const { setHasAddress } = useContext(AddressContext);
   const navigate = useNavigate();
   const [addresses, setAddresses] = React.useState([]);
   const { setCurrentAddress } = useContext(CurrentAddressContext);
 
   useEffect(() => {
-    async function requestEnergyBills() {
+    async function requestAddresses() {
       const response = await getAddressByUser(token, payload);
       return response;
     }
-    requestEnergyBills().then((data) => {
+    requestAddresses().then((data) => {
       setAddresses(data);
     });
   }, []);

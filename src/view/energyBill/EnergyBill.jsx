@@ -1,15 +1,14 @@
 import React from "react";
 import DefaultInput from "../utils/Form/DefaultInput";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { MagnifyingGlass, PlusCircle } from "@phosphor-icons/react";
 import Header from "../utils/Header";
-import axios from "axios";
 import errorImage from "../../images/noRegistersImage.svg";
 import EnergyBillItem from "./EnergyBillItem";
 import energyBillImageDeco from "../../images/decoEnergyBill.svg";
-import useToken from "../app/useToken";
-import useAddress from "../utils/useAddress";
+import axios from "axios";
 import { AddressContext } from "../../states/AddressContext";
+import useToken from "../app/useToken";
 import { CurrentAddressContext } from "../../states/CurrentAddressContext";
 
 const EnergyBill = () => {
@@ -21,20 +20,69 @@ const EnergyBill = () => {
     state: true,
   });
   const navigate = useNavigate();
-  const [address, setAddress] = useAddress();
-  const { currentAddress } = React.useContext(CurrentAddressContext);
+  const { currentAddress, setCurrentAddress } = React.useContext(
+    CurrentAddressContext
+  );
+  const { token } = useToken();
 
   React.useEffect(() => {
-    console.log(currentAddress);
-    if (currentAddress) {
-      setEnergyBills(currentAddress.energyBills);
-    } else {
-      setError({
-        message: "Nenhuma fatura até o momento... :(",
-        code: "404",
-        state: true,
-      });
-    }
+    async function getAllEnergyBills(addressId) {
+        try {
+          const response = await axios
+            .get(
+              `http://localhost:8080/api/energyBill/getAll/${addressId}`,
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                  "Content-Type": "application/json",
+                  Accept: "application/json",
+                },
+              }
+            );
+            const responseData = response.data.data;
+            setCurrentAddress(responseData[0].address);
+            setEnergyBills(responseData);
+        } catch (Error) {
+          setError({
+            message: "Erro ao carregar faturas",
+            code: Error,
+            state: true,
+          });
+        } 
+        }
+        if(currentAddress){
+          getAllEnergyBills(currentAddress.id);
+        }else{
+          const secondRequest = async () =>{
+            const params = new Proxy(new URLSearchParams(window.location.search), {
+              get: (searchParams, prop) => searchParams.get(prop),
+            });
+            const addressId = params.address;
+            getAllEnergyBills(addressId);
+          }
+          secondRequest();
+          }
+          
+    // if (currentAddress) {
+    //   fetch(
+    //     `http://localhost:8080/api/energyBill/getAll/${currentAddress.id}`
+    //   )
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //       setEnergyBills(data);
+    //     });
+    // }else{
+
+    // }
+    // if (currentAddress) {
+    //   setEnergyBills(currentAddress.energyBills);
+    // } else {
+    //   setError({
+    //     message: "Nenhuma fatura até o momento... :(",
+    //     code: "404",
+    //     state: true,
+    //   });
+    // }
   }, []);
 
   return (
@@ -74,15 +122,16 @@ const EnergyBill = () => {
           </ul>
         )}
 
-        {energyBills !== [] && energyBills.length > 0 && (
+        {energyBills !== {} && (
           <ul className="default-item-list">
             {energyBills.map((energyBill) => (
               <EnergyBillItem
-                address={energyBill.address.houseNumber}
+                address={currentAddress.houseNumber}
                 dueDate={energyBill.dueDate}
                 consumptionReais={energyBill.energyConsumptionReais}
                 consumptionkWh={energyBill.energyConsumption_kWh}
                 id={energyBill.id}
+                key={energyBill.id}
               />
             ))}
           </ul>
@@ -99,7 +148,9 @@ const EnergyBill = () => {
         <button
           className="primary-button btn-cadastrar"
           type="button"
-          onClick={() => navigate(`/energyBill/cadastro/?address=${address}`)}
+          onClick={() =>
+            navigate(`/energyBill/cadastro/?address=${currentAddress.id}`)
+          }
         >
           <PlusCircle size={24} />
           Cadastrar Fatura
