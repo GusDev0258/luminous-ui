@@ -1,5 +1,5 @@
 import React from "react";
-import DefaultInput from '../utils/Form/DefaultInput';
+import DefaultInput from "../utils/Form/DefaultInput";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { MagnifyingGlass, PlusCircle } from "@phosphor-icons/react";
 import Header from "../utils/Header";
@@ -9,6 +9,8 @@ import EnergyBillItem from "./EnergyBillItem";
 import energyBillImageDeco from "../../images/decoEnergyBill.svg";
 import useToken from "../app/useToken";
 import useAddress from "../utils/useAddress";
+import { AddressContext } from "../../states/AddressContext";
+import { CurrentAddressContext } from "../../states/CurrentAddressContext";
 
 const EnergyBill = () => {
   const [search, setSearch] = React.useState("");
@@ -19,45 +21,22 @@ const EnergyBill = () => {
     state: true,
   });
   const navigate = useNavigate();
-  const { token } = useToken();
   const [address, setAddress] = useAddress();
-  const [loading, setLoading] = React.useState(true);
+  const { currentAddress } = React.useContext(CurrentAddressContext);
 
   React.useEffect(() => {
-    async function requestAllEnergyBills() {
-      try {
-        const response = await axios.get(
-          `http://localhost:8080/api/energyBill/getAll/${address}`,
-          {
-            headers: {
-              authorization: `Bearer ${token}`,
-              Accept: "application/json",
-              "Content-type": "application/json",
-            },
-          }
-        );
-        return response.data;
-      } catch (error) {
-        setError({
-          message: error.message,
-          code: error.code,
-          state: false,
-        });
-        return null;
-      }
+    console.log(currentAddress);
+    if (currentAddress) {
+      setEnergyBills(currentAddress.energyBills);
+    } else {
+      setError({
+        message: "Nenhuma fatura até o momento... :(",
+        code: "404",
+        state: true,
+      });
     }
-
-    requestAllEnergyBills().then((response) => {
-      if (response !== null) {
-        console.log(response.data);
-        setEnergyBills(response.data);
-      }
-      setLoading(false); 
-    });
   }, []);
-  if(loading){
-    return (<div>Loading Bills...</div>)
-  }
+
   return (
     <div>
       <Header textContent="Minhas Faturas" />
@@ -86,16 +65,14 @@ const EnergyBill = () => {
           </ul>
         )}
 
-        {energyBills &&
-          energyBills.length === 0 &&
-          error.state !== false && (
-            <ul className="image-list">
-              <li key={error.code}>
-                <img src={errorImage} alt="Error" />
-                {"Nenhuma fatura até o momento... :("}
-              </li>
-            </ul>
-          )}
+        {energyBills && energyBills.length === 0 && error.state !== false && (
+          <ul className="image-list">
+            <li key={error.code}>
+              <img src={errorImage} alt="Error" />
+              {"Nenhuma fatura até o momento... :("}
+            </li>
+          </ul>
+        )}
 
         {energyBills !== [] && energyBills.length > 0 && (
           <ul className="default-item-list">

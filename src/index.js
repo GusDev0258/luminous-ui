@@ -14,22 +14,25 @@ import CadAddress from './view/cadAddress/CadAddress';
 import { AddressContextProvider } from './states/AddressContext';
 import EnergyBill from './view/energyBill/EnergyBill';
 import EnergyBillCadastro from './view/energyBill/EnergyBillCadastro';
+import { CurrentAddressProvider } from './states/CurrentAddressContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
   <BrowserRouter>
     <AddressContextProvider>
+    <CurrentAddressProvider>
     <Routes>
       <Route path="/login" element={<Login />}/>
       <Route path="/register" element={<CadUser/>}/>
       <Route path="/" element={<App />}/>
       <Route path="/home" element={<Home />}/>
-      <Route path="/register-address" element={<CadAddress/>}/>
       <Route path="/white-taxes" element={<WhiteTax/>}/>
+      <Route path="/register-address" element={<CadAddress/>}/>
       <Route path="/energyBill/" element={<EnergyBill/>}/>
       <Route path="/energyBill/cadastro/" element={<EnergyBillCadastro/>}/>
     </Routes>
+    </CurrentAddressProvider>
     <AuthVerify/>
     <SnackBar/>
     </AddressContextProvider>
