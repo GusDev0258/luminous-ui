@@ -28,6 +28,7 @@ const EnergyBill = () => {
   React.useEffect(() => {
     async function getAllEnergyBills(addressId) {
         try {
+          debugger;
           const response = await axios
             .get(
               `http://localhost:8080/api/energyBill/getAll/${addressId}`,
@@ -39,50 +40,33 @@ const EnergyBill = () => {
                 },
               }
             );
-            const responseData = response.data.data;
+            const responseData = response.data;
+            console.log(responseData);
             setCurrentAddress(responseData[0].address);
             setEnergyBills(responseData);
+            console.log(responseData);
         } catch (Error) {
           setError({
             message: "Erro ao carregar faturas",
             code: Error,
-            state: true,
+            state: false,
           });
         } 
         }
-        if(currentAddress){
+        if(currentAddress !== undefined){
           getAllEnergyBills(currentAddress.id);
         }else{
-          const secondRequest = async () =>{
-            const params = new Proxy(new URLSearchParams(window.location.search), {
-              get: (searchParams, prop) => searchParams.get(prop),
-            });
-            const addressId = params.address;
-            getAllEnergyBills(addressId);
+          console.log('entrou aqui');
+          const params = new Proxy(new URLSearchParams(window.location.search), {
+            get: (searchParams, prop) => searchParams.get(prop),
+          });
+          const addressId = params.address;
+          const secondRequest = async (id) =>{
+            
+            getAllEnergyBills(id);
           }
-          secondRequest();
+          secondRequest(addressId);
           }
-          
-    // if (currentAddress) {
-    //   fetch(
-    //     `http://localhost:8080/api/energyBill/getAll/${currentAddress.id}`
-    //   )
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //       setEnergyBills(data);
-    //     });
-    // }else{
-
-    // }
-    // if (currentAddress) {
-    //   setEnergyBills(currentAddress.energyBills);
-    // } else {
-    //   setError({
-    //     message: "Nenhuma fatura até o momento... :(",
-    //     code: "404",
-    //     state: true,
-    //   });
-    // }
   }, []);
 
   return (
@@ -107,8 +91,8 @@ const EnergyBill = () => {
           <ul className="image-list">
             <li key={error.code}>
               <img src={errorImage} alt="Error" />
-              {error.message === "Network Error" &&
-                "Verifique sua Conexão com a internet"}
+              {error.message === "Erro ao carregar faturas" &&
+                "Estamos passando por problemas técnicos..."}
             </li>
           </ul>
         )}
@@ -133,7 +117,7 @@ const EnergyBill = () => {
                 id={energyBill.id}
                 key={energyBill.id}
               />
-            ))}
+            ))} 
           </ul>
         )}
 
