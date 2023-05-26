@@ -5,8 +5,9 @@ const AddressContext = createContext();
 
 const AddressContextProvider = ({children}) => {
     const [hasAddress, setHasAddress] = useState({});
+    const [visible, setVisible] = useState(true);
     return (
-        <AddressContext.Provider value={{hasAddress, setHasAddress}}>
+        <AddressContext.Provider value={{hasAddress, setHasAddress, visible, setVisible}}>
             {children}
         </AddressContext.Provider>
     );

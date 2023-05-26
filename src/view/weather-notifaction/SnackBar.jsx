@@ -1,51 +1,51 @@
-// import useToken from "../app/useToken";
-// import { AddressContext } from "../../states/AddressContext";
-// import { useLocation } from "react-router-dom";
-// import { Fragment, useContext, useEffect, useState } from "react";
-// import { getWeatherTips } from "../../api/FetchWeatherTip";
 
-// function notInRegisterAndLogin(location) {
-//   return location.pathname !== "/register" && location.pathname !== "/login";
-// }
+import React, { useState, useEffect, Fragment, memo } from 'react';
+import useToken from "../app/useToken";
+import { getWeatherTips } from "../../api/FetchWeatherTip";
 
-// function isInHome(location) {
-//   return location.pathname === "/home";
-// }
+const SnackBar = memo(() => {
+  const [notification, setNotification] = useState({});
+  const { token, payload } = useToken();
 
-// export default function SnackBar() {
-//   const location = useLocation();
-//   const { token, payload } = useToken();
-//   const [visible, setVisible] = useState(true);
-//   const [notification, setNotification] = useState({});
-//   const { hasAddress } = useContext(AddressContext);
-//   const FIVE_MINUTES = 5 * 60 * 1000;
+  const fetchNotifications = async () => {
+    try {
+      const data = await getWeatherTips(token, payload);
+      console.log(data);
+      setNotification(await getWeatherTips(token, payload));
+    } catch (error) {
+      console.error('Error fetching notifications:', error);
+    }
+  };
 
-//   useEffect(() => {
-//     (async () => {
-//       if (notInRegisterAndLogin(location) || isInHome(location)) {
-//         if (Object.keys(notification).length === 0 && payload) {
-//           setNotification(await getWeatherTips(token, payload));
-//           const timer = setInterval(() => setVisible(true), FIVE_MINUTES);
-//           return () => clearInterval(timer);
-//         }
-//       }
-//     })();
-//   }, [hasAddress]);
+  useEffect(() => {
+    const interval = setInterval(fetchNotifications, 5 * 60 * 1000);
 
-//   return (
-//     <Fragment>
-//       {visible && Object.keys(notification).length !== 0 ? (
-//         <div>
-//           <div>{notification.city}</div>
-//           <div>{notification.description}</div>
-//           <div>{notification.feelsLike}</div>
-//           <div>{notification.temperature}</div>
-//           <div>{notification.tip}</div>
-//           <button onClick={() => setVisible(false)}>X</button>
-//         </div>
-//       ) : (
-//         <Fragment></Fragment>
-//       )}
-//     </Fragment>
-//   );
-// }
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+  const closeNotification = () => {
+    setNotification({});
+  };
+
+  return (
+    <Fragment>
+      {Object.keys(notification).length !== 0 ?
+      <div>
+          <div>
+            <p>{notification.description}</p>
+            <p>{notification.city}</p>
+            <p>{notification.temperature}</p>
+            <p>{notification.feelsLike}</p>
+            <p>{notification.tip}</p>
+            <button onClick={() => closeNotification()}>Close</button>
+          </div>
+      </div> :
+<Fragment></Fragment>
+    }
+    </Fragment>
+  );
+});
+
+export default SnackBar;

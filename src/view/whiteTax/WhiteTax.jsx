@@ -65,9 +65,11 @@ export default function WhiteTax() {
   }, [company])
 
   if(!whiteTaxes) {
-    const data = getWhiteTaxes(token);
-    setCompany(data[0]);
-      setWhiteTaxes({whiteTaxes: data});
+    (async () => {
+      const data = await getWhiteTaxes(token);
+      setCompany(data[0]);
+        setWhiteTaxes({whiteTaxes: data});
+    })()
     return <Loading/>
   } else {
   return (

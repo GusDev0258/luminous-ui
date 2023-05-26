@@ -8,5 +8,6 @@ export async function getWeatherTips(token, {id}) {
     },
   })
   .then((data) => data.json());
+  console.log(response);
   return response;
 }

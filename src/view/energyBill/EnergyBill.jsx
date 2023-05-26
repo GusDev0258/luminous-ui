@@ -28,7 +28,6 @@ const EnergyBill = () => {
   React.useEffect(() => {
     async function getAllEnergyBills(addressId) {
         try {
-          debugger;
           const response = await axios
             .get(
               `http://localhost:8080/api/energyBill/getAll/${addressId}`,
