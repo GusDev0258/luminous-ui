@@ -25,3 +25,17 @@ export async function registerUser (data) {
 
     return response;
  }
+
+ export async function getUser(token, {id}) {
+    const response = await fetch(`http://localhost:8080/api/user/${id}`, {
+      method: 'GET',
+      headers: {
+       Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization':`Bearer ${token}`
+      },
+    })
+    .then((data) => data.json());
+
+    return response;
+ }

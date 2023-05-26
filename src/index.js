@@ -1,35 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import {StrictMode} from 'react';
+import {render} from 'react-dom';
+import {createRoot } from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import App from './view/app/App';
-import Home from './view/home/Home';
-import Login from './view/login/Login';
-import CadUser from './view/cadUser/CadUser';
-import WhiteTax from './view/whiteTax/WhiteTax';
-import AuthVerify from './view/auth/AuthVerify';
+import { BrowserRouter } from 'react-router-dom';
 import SnackBar from './view/weather-notifaction/SnackBar';
-import CadAddress from './view/cadAddress/CadAddress';
-import { AddressContextProvider } from './states/AddressContext';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+createRoot(document.getElementById('root')).render(
+      <StrictMode>
+        <BrowserRouter>
+          <App/>
+        </BrowserRouter>
+      </StrictMode>
 
-  <BrowserRouter>
-    <AddressContextProvider>
-    <Routes>
-      <Route path="/login" element={<Login />}/>
-      <Route path="/register" element={<CadUser/>}/>
-      <Route path="/" element={<App />}/>
-      <Route path="/home" element={<Home />}/>
-      <Route path="/register-address" element={<CadAddress/>}/>
-      <Route path="/white-taxes" element={<WhiteTax/>}/>
-    </Routes>
-    <AuthVerify/>
+);
+
+createRoot(document.getElementById('snackbar-root')).render(
+  <StrictMode>
     <SnackBar/>
-    </AddressContextProvider>
-  </BrowserRouter>
+  </StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
