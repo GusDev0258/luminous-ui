@@ -5,6 +5,7 @@ import axios from "axios";
 import useToken from "../app/useToken";
 import { useNavigate } from "react-router-dom";
 import { CurrentAddressContext } from "../../states/CurrentAddressContext";
+import { BASE_URL } from "../../api/DefaultUrl";
 
 const EnergyBillCadastro = () => {
   const [referenceDate, setReferenceDate] = React.useState("");
@@ -32,17 +33,13 @@ const EnergyBillCadastro = () => {
 
     formData.append("file", file);
 
-    const response = await axios.post(
-      "http://localhost:8080/api/billFile/upload",
-      formData,
-      {
-        headers: {
-          authorization: `Bearer ${token}`,
-          Accept: "application/json",
-          "Content-type": "multipart/form-data",
-        },
-      }
-    );
+    const response = await axios.post(`${BASE_URL}billFile/upload`, formData, {
+      headers: {
+        authorization: `Bearer ${token}`,
+        Accept: "application/json",
+        "Content-type": "multipart/form-data",
+      },
+    });
     console.log(response);
     await setFileId(response.data);
   };
@@ -51,7 +48,7 @@ const EnergyBillCadastro = () => {
     event.preventDefault();
     await axios
       .post(
-        `http://localhost:8080/api/energyBill/address/${currentAddress.id}/billFile/${fileId}`,
+        `${BASE_URL}/energyBill/address/${currentAddress.id}/billFile/${fileId}`,
         {
           referenceDate,
           dueDate,

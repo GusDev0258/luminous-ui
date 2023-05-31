@@ -10,6 +10,7 @@ import axios from "axios";
 import { AddressContext } from "../../states/AddressContext";
 import useToken from "../app/useToken";
 import { CurrentAddressContext } from "../../states/CurrentAddressContext";
+import { BASE_URL } from "../../api/DefaultUrl";
 
 const EnergyBill = () => {
   const [search, setSearch] = React.useState("");
@@ -27,45 +28,43 @@ const EnergyBill = () => {
 
   React.useEffect(() => {
     async function getAllEnergyBills(addressId) {
-        try {
-          const response = await axios
-            .get(
-              `http://localhost:8080/api/energyBill/getAll/${addressId}`,
-              {
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                  "Content-Type": "application/json",
-                  Accept: "application/json",
-                },
-              }
-            );
-            const responseData = response.data;
-            console.log(responseData);
-            setCurrentAddress(responseData[0].address);
-            setEnergyBills(responseData);
-            console.log(responseData);
-        } catch (Error) {
-          setError({
-            message: "Erro ao carregar faturas",
-            code: Error,
-            state: false,
-          });
-        } 
-        }
-        if(currentAddress !== undefined){
-          getAllEnergyBills(currentAddress.id);
-        }else{
-          console.log('entrou aqui');
-          const params = new Proxy(new URLSearchParams(window.location.search), {
-            get: (searchParams, prop) => searchParams.get(prop),
-          });
-          const addressId = params.address;
-          const secondRequest = async (id) =>{
-            
-            getAllEnergyBills(id);
+      try {
+        const response = await axios.get(
+          `${BASE_URL}energyBill/getAll/${addressId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
           }
-          secondRequest(addressId);
-          }
+        );
+        const responseData = response.data;
+        console.log(responseData);
+        setCurrentAddress(responseData[0].address);
+        setEnergyBills(responseData);
+        console.log(responseData);
+      } catch (Error) {
+        setError({
+          message: "Erro ao carregar faturas",
+          code: Error,
+          state: false,
+        });
+      }
+    }
+    if (currentAddress !== undefined) {
+      getAllEnergyBills(currentAddress.id);
+    } else {
+      console.log("entrou aqui");
+      const params = new Proxy(new URLSearchParams(window.location.search), {
+        get: (searchParams, prop) => searchParams.get(prop),
+      });
+      const addressId = params.address;
+      const secondRequest = async (id) => {
+        getAllEnergyBills(id);
+      };
+      secondRequest(addressId);
+    }
   }, []);
 
   return (
@@ -116,7 +115,7 @@ const EnergyBill = () => {
                 id={energyBill.id}
                 key={energyBill.id}
               />
-            ))} 
+            ))}
           </ul>
         )}
 
