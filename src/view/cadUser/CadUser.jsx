@@ -49,9 +49,7 @@ export default function CadUser() {
     }
   }
 
-  useEffect(() => {
-
-  }, [phone])
+  useEffect(() => {}, [phone])
 
   return (
     <div>

@@ -39,3 +39,31 @@ export async function registerUser (data) {
 
     return response;
  }
+
+ export async function updateUser(token, {id}, userData) {
+  const response = await fetch(`http://localhost:8080/api/user/${id}`, {
+    method: 'PUT',
+    headers: {
+     Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization':`Bearer ${token}`
+    },
+    body: JSON.stringify(userData)
+  })
+  .then((data) => data.json());
+
+  return response;
+}
+
+export async function deleteUser(token, {id}) {
+  const response = await fetch(`http://localhost:8080/api/user/${id}`, {
+    method: 'DELETE',
+    headers: {
+     Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization':`Bearer ${token}`
+    },
+  });
+
+  return response;
+}

@@ -1,50 +1,44 @@
-import React, { useState, useEffect, Fragment, memo } from 'react';
+import React, { useState, useEffect, Fragment } from "react";
 import useToken from "../app/useToken";
 import { getWeatherTips } from "../../api/FetchWeatherTip";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Notification from "./Notification";
 
-const SnackBar = memo(() => {
+const FIVE_MINUTES = 5 * 60 * 1000;
+
+const SnackBar = () => {
   const [notification, setNotification] = useState({});
   const { token, payload } = useToken();
 
   const fetchNotifications = async () => {
     try {
       const data = await getWeatherTips(token, payload);
-      console.log(data);
-      setNotification(await getWeatherTips(token, payload));
-    } catch (error) {
-      console.error('Error fetching notifications:', error);
-    }
+      setNotification(data);
+      notify(data);
+    } catch (error) {}
   };
 
   useEffect(() => {
-    const interval = setInterval(fetchNotifications, 5 * 60 * 1000);
+    if (
+      window.location.pathname !== "/register" &&
+      window.location.pathname !== "/login"
+    ) {
+      const interval = setInterval(fetchNotifications, FIVE_MINUTES);
 
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
+      return () => {
+        clearInterval(interval);
+      };
+    }
+  }, [notification]);
 
-  const closeNotification = () => {
-    setNotification({});
-  };
+  const notify = (data) => toast(<Notification notification={data} />);
 
   return (
     <Fragment>
-      {Object.keys(notification).length !== 0 ?
-      <div>
-          <div>
-            <p>{notification.description}</p>
-            <p>{notification.city}</p>
-            <p>{notification.temperature}</p>
-            <p>{notification.feelsLike}</p>
-            <p>{notification.tip}</p>
-            <button onClick={() => closeNotification()}>Close</button>
-          </div>
-      </div> :
-<Fragment></Fragment>
-    }
+      <ToastContainer />
     </Fragment>
   );
-});
+};
 
 export default SnackBar;

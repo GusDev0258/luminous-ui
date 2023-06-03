@@ -7,6 +7,7 @@ function App() {
     <div>
       <Link to='/white-taxes'><button>white-taxes</button></Link>
       <Link to='/'><button>home</button></Link>
+      <Link to='/profile'><button>Profile</button></Link>
       <Router />
     </div>
   );

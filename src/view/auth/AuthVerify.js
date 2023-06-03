@@ -9,9 +9,8 @@ export default function AuthVerify() {
 
   useEffect(() => {
     if (location.pathname !== "/register") {
-
       if (!payload || payload.exp * 1000 < Date.now()) {
-        sessionStorage.removeItem('token');
+        localStorage.removeItem('token');
         navigate("/login");
       }
     }
