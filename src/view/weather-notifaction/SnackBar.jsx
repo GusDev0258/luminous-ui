@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect, Fragment, memo } from 'react';
 import useToken from "../app/useToken";
 import { getWeatherTips } from "../../api/FetchWeatherTip";
 import { ToastContainer, toast } from "react-toastify";

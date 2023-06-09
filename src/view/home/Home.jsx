@@ -1,44 +1,30 @@
-
+import React from "react";
 import { useContext, useEffect } from "react";
 import { getAddressByUser } from "../../api/FetchAddress";
 import useToken from "../app/useToken";
 import { AddressContext } from "../../states/AddressContext";
-import React from "react";
+import { CurrentAddressContext } from "../../states/CurrentAddressContext";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 import Header from "../utils/Header";
-import DefaultItem from './AddressItem';
-
+import DefaultItem from "./AddressItem";
 
 export default function Home() {
-  const {token, payload} = useToken();
-  const {setHasAddress} = useContext(AddressContext);
+  const { token, payload } = useToken();
+  // const { setHasAddress } = useContext(AddressContext);
   const navigate = useNavigate();
   const [addresses, setAddresses] = React.useState([]);
+  const { setCurrentAddress } = useContext(CurrentAddressContext);
 
-  React.useEffect(() => {
-    fetchData();
-  },[]);
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(
-        `http://localhost:8080/api/address/user/10`,
-        {
-          headers: {
-            authorization: `Bearer ${token}`,
-            Accept: "application/json",
-            "Content-type": "application/json",
-          },
-        }
-      );
-      await setAddresses(response.data);
+  useEffect(() => {
+    async function requestAddresses() {
+      const response = await getAddressByUser(token, payload);
       return response;
-    } catch (error) {
     }
-  };
-
+    requestAddresses().then((data) => {
+      setAddresses(data);
+    });
+  }, []);
   return (
     <div>
       <Header textContent={"Minhas Residências"} />

@@ -13,7 +13,6 @@ createRoot(document.getElementById('root')).render(
           <App/>
         </BrowserRouter>
       </StrictMode>
-
 );
 
 createRoot(document.getElementById('snackbar-root')).render(
