@@ -16,6 +16,7 @@ export default function Router() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<CadUser />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/register-address" element={<CadAddress />} />
         <Route path="/white-taxes" element={<WhiteTax />} />
         <Route path="/profile" element={<Profile />} />
