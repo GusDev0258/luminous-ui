@@ -48,43 +48,48 @@ export default function Profile() {
   } else {
     return (
       <Fragment>
+        <div className="default-form-container">
         <h1>Meu Perfil</h1>
-        <h2>{user.userName}</h2>
-        <h3>Informações do usuário</h3>
-        <div>
+        <h1 className="primary-title">{user.userName}</h1>
+        <h2>Informações do usuário</h2>
           <form onSubmit={handleSubmit((e) => updateUserData(e))}>
-            <label>
+            <label className="control-label">
               <p>Nome</p>
               <input
                 type="text"
+                className="default-form-input"
                 defaultValue={user.name}
                 {...register("name")}
               />
             </label>
-            <label>
+            <label className="control-label">
               <p>Username</p>
               <input
                 type="text"
                 defaultValue={user.userName}
+                className="default-form-input"
                 {...register("userName")}
               />
             </label>
-            <label>
+            <label className="control-label">
               <p>Senha</p>
-              <input type="password" />
+              <input type="password" className="default-form-input"
+ />
             </label>
-            <label>
+            <label className="control-label">
               <p>Data de nascimento</p>a
               <input
                 type="date"
                 defaultValue={user.birthdate}
+                className="default-form-input"
                 {...register("birthdate")}
               />
             </label>
-            <label>
+            <label className="control-label">
               <p>Telefone</p>
               <input
                 type="text"
+                className="default-form-input"
                 maxLength="15"
                 value={phone}
                 {...register("phone", {
@@ -96,8 +101,8 @@ export default function Profile() {
             <button type="submit">Atualizar dados</button>
           </form>
 
-          <DeleteModal/>
         </div>
+          <DeleteModal/>
       </Fragment>
     );
   }

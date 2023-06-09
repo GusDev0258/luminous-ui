@@ -1,0 +1,20 @@
+.primary-title{
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: 'Poppins', Georgia, 'Times New Roman', Times, serif;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+}
+.primary-title-header{
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: 'Poppins', Georgia, 'Times New Roman', Times, serif;
+}
+
+
+@media (min-width: 1087px) {
+  .primary-title {
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+  }
+}

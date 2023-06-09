@@ -26,8 +26,8 @@ export default function DeleteModal() {
       };
 
     return (
-    <Fragment>
-      <button type="button" onClick={openModal}>Excluir conta</button>
+    <div className="btn-delete-container">
+      <button className="btn-delete"  type="button" onClick={openModal}>Excluir conta</button>
       <Modal
         isOpen={isModalOpen}
         onRequestClose={closeModal}
@@ -38,7 +38,7 @@ export default function DeleteModal() {
         <button onClick={closeModal}>Cancelar</button>
         <button onClick={deleteAccount}>Deletar mesmo assim</button>
       </Modal>
-    </Fragment>
+    </div>
     );
   };
 

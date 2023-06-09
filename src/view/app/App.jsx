@@ -1,13 +1,18 @@
-import Router from "../../api/routes/Router";
+import Router from "../../routes/Router";
 import { Link } from "react-router-dom";
 
 function App() {
-
   return (
     <div>
-      <Link to='/white-taxes'><button>white-taxes</button></Link>
-      <Link to='/'><button>home</button></Link>
-      <Link to='/profile'><button>Profile</button></Link>
+      <Link to="/white-taxes">
+        <button>white-taxes</button>
+      </Link>
+      <Link to="/">
+        <button>home</button>
+      </Link>
+      <Link to="/profile">
+        <button>Profile</button>
+      </Link>
       <Router />
     </div>
   );

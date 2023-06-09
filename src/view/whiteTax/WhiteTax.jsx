@@ -122,11 +122,11 @@ export default function WhiteTax() {
     loadGraph(company);
   }, [company]);
 
-  if (prices.indexOf(0) === 0) {
+  if (!whiteTaxes) {
     (async () => {
       const data = await getWhiteTaxes(token);
+      setWhiteTaxes({whiteTaxes: data});
       setCompany(data[0]);
-      setWhiteTaxes({ whiteTaxes: data });
     })();
     return <Loading />;
   } else {
@@ -137,6 +137,7 @@ export default function WhiteTax() {
             onChange={(e) => handleChange(e)}
             name="white-taxes"
             value={selectedItem}
+            className="default-form-input"
           >
             {whiteTaxes.map((whiteTax, index) => (
               <option value={whiteTax.energyProvider.companyName} key={index}>
@@ -145,17 +146,19 @@ export default function WhiteTax() {
             ))}
           </select>
         </form>
-        <div>
-          <div>Preço convencional: {company.regularPrice}</div>
-          <div>Economia KWh ao aderir a tarifa branca: {company.save}</div>
-          <div>Preço horário de ponta: {company.highPrice}</div>
-          <div>Preço horário de transição: {company.middlePrice}</div>
-          <div>Preço horário fora de ponta: {company.lowPrice}</div>
+        <div className="chart-info-container">
+          <div>Preço convencional: R${company.regularPrice}</div>
+          <div>Economia KWh ao aderir a tarifa branca: R${company.save}</div>
+          <div>Preço horário de ponta: R${company.highPrice}</div>
+          <div>Preço horário de transição: R${company.middlePrice}</div>
+          <div>Preço horário fora de ponta: R${company.lowPrice}</div>
         </div>
         <div></div>
-        <div>
+        <div className="chart-container">
           <Chart
             type="bar"
+            options={{maintainAspectRatio: false}}
+            style={{display: "block", width: "1572px", height: "663px"}}
             data={{
               labels: labels,
               datasets: [
