@@ -36,7 +36,7 @@ export default function Home() {
             neighborhood={address.neighborhood}
             state={address.state}
             street={address.street}
-            handleClick={() => navigate(`/energyBill/?address=${address.id}`)}
+            handleClick={() => navigate(`/integracoes/?address=${address.id}`)}
             key={address.id}
           />
           ))}</ul>

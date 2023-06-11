@@ -5,7 +5,7 @@ const ConsumptionAlertItem = ({id,address, consumption, description, type,...pro
     <>  
     <li className="default-item" id={id}>
     <span className="default-item-title-text">{address}</span>
-    <span className="default-item-main-text">Descrição - {description}</span>
+    <span className="default-item-main-text">{description}</span>
     <span className="default-item-footer-text">
       {type === "REAIS" ? `R$${consumption}` : `${consumption}kWh`}
     </span>

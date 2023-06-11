@@ -11,6 +11,9 @@ import Profile from "../view/profile/Profile";
 import EnergyBill from "../view/energyBill/EnergyBill";
 import EnergyBillCadastro from "../view/energyBill/EnergyBillCadastro";
 import { CurrentAddressProvider } from "../states/CurrentAddressContext";
+import AddressIntegration from "../view/addressIntegrations/AddressIntegration";
+import ConsumptionAlert from "../view/ConsumptionAlert/ConsumptionAlert";
+import ConsumptionAlertCadastro from "../view/ConsumptionAlert/ConsumptionAlertCadastro";
 
 export default function Router() {
   return (
@@ -24,8 +27,11 @@ export default function Router() {
         <Route path="/white-taxes" element={<WhiteTax />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/integracoes/" element={<AddressIntegration/>}/>
         <Route path="/energyBill/" element={<EnergyBill/>}/>
         <Route path="/energyBill/cadastro/" element={<EnergyBillCadastro/>}/>
+        <Route path="/consumption-alert/" element={<ConsumptionAlert/>}/>
+        <Route path="/consumption-alert/cadastro/" element={<ConsumptionAlertCadastro/>}/>
       </Routes>
       </CurrentAddressProvider>
       <AuthVerify />

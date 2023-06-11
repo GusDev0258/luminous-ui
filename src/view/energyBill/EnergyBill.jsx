@@ -7,7 +7,6 @@ import errorImage from "../../images/noRegistersImage.svg";
 import EnergyBillItem from "./EnergyBillItem";
 import energyBillImageDeco from "../../images/decoEnergyBill.svg";
 import axios from "axios";
-import { AddressContext } from "../../states/AddressContext";
 import useToken from "../app/useToken";
 import { CurrentAddressContext } from "../../states/CurrentAddressContext";
 import { BASE_URL } from "../../api/DefaultUrl";

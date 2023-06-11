@@ -48,7 +48,7 @@ const EnergyBillCadastro = () => {
     event.preventDefault();
     await axios
       .post(
-        `${BASE_URL}/energyBill/address/${currentAddress.id}/billFile/${fileId}`,
+        `${BASE_URL}energyBill/address/${currentAddress.id}/billFile/${fileId}`,
         {
           referenceDate,
           dueDate,
