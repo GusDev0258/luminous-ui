@@ -69,17 +69,24 @@ export default function WhiteTax() {
     "23:00",
     "23:30",
   ];
-
   const searchForExpecificCompany = (companyName) => {
     return whiteTaxes.filter(
       (whiteTax) => whiteTax.energyProvider.companyName === companyName
     );
   };
 
-  const handleChange = (e) => {
-    const [companyData] = searchForExpecificCompany(e.target.value);
-    setCompany(companyData);
-    setSelectedItem(e.target.value);
+  const handleChange = ({ target }) => {
+    if (target.value === "Selecione uma distribuidora") {
+      setSelectedItem(target.value);
+      return;
+    } else {
+      document
+        .querySelector("option[value='Selecione uma distribuidora']")
+        .setAttribute("disabled", "disabled");
+      const [companyData] = searchForExpecificCompany(target.value);
+      setCompany(companyData);
+      setSelectedItem(target.value);
+    }
   };
 
   // eslint-disable-next-line array-callback-return, react-hooks/exhaustive-deps
@@ -125,7 +132,7 @@ export default function WhiteTax() {
   if (!whiteTaxes) {
     (async () => {
       const data = await getWhiteTaxes(token);
-      setWhiteTaxes({whiteTaxes: data});
+      setWhiteTaxes({ whiteTaxes: data });
       setCompany(data[0]);
     })();
     return <Loading />;
@@ -138,7 +145,11 @@ export default function WhiteTax() {
             name="white-taxes"
             value={selectedItem}
             className="default-form-input"
+            placeholder="Selecione uma distribuidora"
           >
+            <option value="Selecione uma distribuidora">
+              Selecione uma distribuidora
+            </option>
             {whiteTaxes.map((whiteTax, index) => (
               <option value={whiteTax.energyProvider.companyName} key={index}>
                 {whiteTax.energyProvider.companyName}
@@ -147,38 +158,51 @@ export default function WhiteTax() {
           </select>
         </form>
         <div className="chart-info-container">
-          <div>Preço convencional: R${company.regularPrice}</div>
-          <div>Economia KWh ao aderir a tarifa branca: R${company.save}</div>
-          <div>Preço horário de ponta: R${company.highPrice}</div>
-          <div>Preço horário de transição: R${company.middlePrice}</div>
-          <div>Preço horário fora de ponta: R${company.lowPrice}</div>
+          <p>
+            Preço convencional: <strong>R${company.regularPrice}</strong>
+          </p>
+          <p>
+            Economia KWh ao aderir a tarifa strongranca:{" "}
+            <strong>R${company.save}</strong>
+          </p>
+          <p>
+            Preço horário de ponta: <strong>R${company.highPrice}</strong>
+          </p>
+          <p>
+            Preço horário de transição: <strong>R${company.middlePrice}</strong>
+          </p>
+          <p>
+            Preço horário fora de ponta: <strong>R${company.lowPrice}</strong>
+          </p>
         </div>
-        <div></div>
         <div className="chart-container">
-          <Chart
-            type="bar"
-            options={{maintainAspectRatio: false}}
-            style={{display: "block", width: "1572px", height: "663px"}}
-            data={{
-              labels: labels,
-              datasets: [
-                {
-                  id: 1,
-                  label: "preços",
-                  data: prices,
-                  type: "bar",
-                  backgroundColor: BGColor,
-                },
-                {
-                  id: 2,
-                  label: "valor padrão",
-                  type: "line",
-                  data: regularPrice,
-                  backgroundColor: CYAN_COLOR,
-                },
-              ],
-            }}
-          />
+            <Chart
+              type="bar"
+              options={{
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+              }}
+              style={{ display: "block", width: "1572px", height: "663px" }}
+              data={{
+                labels: labels,
+                datasets: [
+                  {
+                    id: 1,
+                    label: "preços",
+                    data: prices,
+                    type: "bar",
+                    backgroundColor: BGColor,
+                  },
+                  {
+                    id: 2,
+                    label: "valor padrão",
+                    type: "line",
+                    data: regularPrice,
+                    backgroundColor: CYAN_COLOR,
+                  },
+                ],
+              }}
+            />
         </div>
       </div>
     );

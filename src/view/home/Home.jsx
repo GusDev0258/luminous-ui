@@ -2,8 +2,6 @@ import React from "react";
 import { useContext, useEffect } from "react";
 import { getAddressByUser } from "../../api/FetchAddress";
 import useToken from "../app/useToken";
-import { AddressContext } from "../../states/AddressContext";
-import { CurrentAddressContext } from "../../states/CurrentAddressContext";
 import { useNavigate } from "react-router-dom";
 
 import Header from "../utils/Header";
@@ -11,10 +9,8 @@ import DefaultItem from "./AddressItem";
 
 export default function Home() {
   const { token, payload } = useToken();
-  // const { setHasAddress } = useContext(AddressContext);
   const navigate = useNavigate();
   const [addresses, setAddresses] = React.useState([]);
-  const { setCurrentAddress } = useContext(CurrentAddressContext);
 
   useEffect(() => {
     async function requestAddresses() {

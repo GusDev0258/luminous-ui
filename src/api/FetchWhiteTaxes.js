@@ -8,6 +8,7 @@ export async function getWhiteTaxes(token) {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
-  }).then((data) => data.json());
-  return data;
+  })
+  let dataResponse = await data.json();
+  return dataResponse;
 }
