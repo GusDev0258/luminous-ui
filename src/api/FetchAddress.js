@@ -11,3 +11,16 @@ export async function getAddressByUser(token, { id }) {
   }).then((data) => data.json());
   return response;
 }
+
+export async function getAddressById(token, addressId){
+  const response = await fetch(`${BASE_URL}address/${addressId}`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  });
+  const result = await response.json();
+  return result;
+}
