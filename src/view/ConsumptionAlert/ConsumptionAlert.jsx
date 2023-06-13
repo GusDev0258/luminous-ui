@@ -7,20 +7,18 @@ import useToken from "../app/useToken";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../api/DefaultUrl";
 import axios from "axios";
+import { CurrentAddressContext } from "../../states/CurrentAddressContext";
 
 const ConsumptionAlert = () => {
-  const params = new Proxy(new URLSearchParams(window.location.search), {
-    get: (searchParams, prop) => searchParams.get(prop),
-  });
-  const addressId = params.address;
 
   const [search, setSearch] = React.useState();
   const [consumptionAlerts, setConsumptionAlerts] = React.useState([]);
   const { token } = useToken();
+  const { currentAddress } = React.useContext(CurrentAddressContext);
   const navigate = useNavigate();
 
   React.useEffect(() =>{
-    axios.get(`${BASE_URL}consumption-alert/getAll/address/${addressId}`, {
+    axios.get(`${BASE_URL}consumption-alert/getAll/address/${currentAddress.id}`, {
       headers: {
         authorization: `Bearer ${token}`,
         Accept: "application/json",
@@ -30,6 +28,12 @@ const ConsumptionAlert = () => {
       console.log(response);
       setConsumptionAlerts(response.data)});
   },[])
+
+  const removeConsumptionAlert = (id) => {
+    setConsumptionAlerts((consumptionAlerts) => {
+      return consumptionAlerts.filter((consumptionAlert) => consumptionAlert.id !== id);
+    })
+  }
 
 
   return (
@@ -58,6 +62,7 @@ const ConsumptionAlert = () => {
                 type={consumptionAlert.consumptionAlertType}
                 id={consumptionAlert.id}
                 key={consumptionAlert.id}
+                onConsumptionAlertDelete={removeConsumptionAlert}
               />
             ))}
           </ul>
@@ -68,7 +73,7 @@ const ConsumptionAlert = () => {
           className="primary-button btn-cadastrar"
           type="button"
           onClick={() =>
-            navigate(`/consumption-alert/cadastro/?address=${addressId}`)
+            navigate(`/consumption-alert/cadastro/`)
           }
         >
           <PlusCircle size={24} />
