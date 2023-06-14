@@ -14,6 +14,7 @@ import { CurrentAddressProvider } from "../states/CurrentAddressContext";
 import AddressIntegration from "../view/addressIntegrations/AddressIntegration";
 import ConsumptionAlert from "../view/ConsumptionAlert/ConsumptionAlert";
 import ConsumptionAlertCadastro from "../view/ConsumptionAlert/ConsumptionAlertCadastro";
+import Tip from "../view/tip/Tip";
 
 export default function Router() {
   return (
@@ -32,6 +33,7 @@ export default function Router() {
         <Route path="/energyBill/cadastro/" element={<EnergyBillCadastro/>}/>
         <Route path="/consumption-alert/" element={<ConsumptionAlert/>}/>
         <Route path="/consumption-alert/cadastro/" element={<ConsumptionAlertCadastro/>}/>
+        <Route path="/login/tip" element={<Tip />}/>
       </Routes>
       </CurrentAddressProvider>
       <AuthVerify />

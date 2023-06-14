@@ -33,7 +33,7 @@ export default function Login() {
     resolver: yupResolver(schema),
   });
 
-  const redirectToHome = () => navigate("/");
+  const redirectToHome = () => navigate("/login/tip");
 
   const login = async (userData) => {
     const data = await loginUser(userData);

@@ -22,6 +22,7 @@ const ConsumptionAlertCadastro = () => {
   const navigate = useNavigate();
   const [consumptionAlertToEdit, setConsumptionAlertToEdit] = React.useState({});
 
+
   React.useEffect(() =>{
     if (consumptionAlertId) {
       axios

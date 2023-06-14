@@ -21,6 +21,12 @@
   background-color: #464646;
 }
 
+.primary-button.continue{
+  max-width: 40vw;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
 .icon-button {
   background-color: transparent;
   border: none;

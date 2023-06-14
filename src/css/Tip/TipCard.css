@@ -1,0 +1,52 @@
+.tip-card-container{
+  max-width: 70vw;
+  word-break: keep-all;
+  max-height: 60vh;
+  margin: 80px auto;
+  background: #FFFFFF;
+  box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+}
+.tip-card-image{
+  margin: 0 auto;
+  padding-top: 12px;
+}
+.tip-card-content{
+  padding: 0 2rem;
+  margin-top: 0.5rem;
+  max-width: 30ch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+
+}
+.tip-card-title{
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: left;
+  font-family: 'Poppins', sans-serif;
+}
+.tip-card-title .dot{
+  color: #FFC107;
+}
+.tip-card-text{
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: left;
+  font-family: 'Lato', sans-serif;
+  line-height: 1.2;
+  color: #57534E;
+}
+.tip-of-day{
+  display: flex;
+  align-items: center;
+  margin-left: 2rem;
+  margin-top: 20px;
+  gap: 0.2rem;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: 'Lato', sans-serif;
+  color: #13131350;
+}
