@@ -75,8 +75,7 @@ export default function Profile() {
             </label>
             <label className="control-label">
               <p>Senha</p>
-              <input type="password" className="default-form-input"
- />
+              <input type="password" className="default-form-input"/>
             </label>
             <label className="control-label">
               <p>Data de nascimento</p>

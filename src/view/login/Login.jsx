@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginUser } from "../../api/FetchUser";
@@ -78,6 +78,9 @@ export default function Login() {
         <p className="default-info-message">
           Não possue uma conta? <a href="/register">Registre-se</a>
         </p>
+        <Link className="default-info-message" to={"/password/recover"}>
+          Esqueceu sua senha?
+        </Link>
         <img src={abstractVector} alt="deco" />
       </div>
     );

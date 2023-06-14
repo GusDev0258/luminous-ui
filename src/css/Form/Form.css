@@ -27,6 +27,7 @@
 .default-info-message{
   font-weight: 500;
   padding: 8px;
+  text-decoration: none;
 }
 .default-info-message a{
   color: #713F12;
