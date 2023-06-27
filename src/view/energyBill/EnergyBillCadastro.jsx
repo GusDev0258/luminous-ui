@@ -26,6 +26,7 @@ const EnergyBillCadastro = () => {
   const energyBillId = params.energyBill;
 
   React.useEffect(() => {
+    document.title = "Cadastro de Fatura | Luminous";
     if (file) {
       handleFileUpload();
     }
@@ -87,7 +88,6 @@ const EnergyBillCadastro = () => {
         "Content-type": "multipart/form-data",
       },
     });
-    console.log(response);
     await setFileId(response.data);
   };
 

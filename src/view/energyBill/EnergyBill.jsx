@@ -33,7 +33,7 @@ const EnergyBill = () => {
 
 
   React.useEffect(() => {
-    console.log(currentAddress);
+    document.title = "Minhas Faturas | Luminous";
     async function getAllEnergyBills() {
       try {
         const response = await axios.get(

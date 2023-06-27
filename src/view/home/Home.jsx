@@ -13,6 +13,7 @@ export default function Home() {
   const [addresses, setAddresses] = React.useState([]);
 
   useEffect(() => {
+    document.title = "Minhas Residências | Luminous";
     async function requestAddresses() {
       const response = await getAddressByUser(token, payload);
       return response;

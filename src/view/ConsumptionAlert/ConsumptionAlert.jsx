@@ -18,6 +18,7 @@ const ConsumptionAlert = () => {
   const navigate = useNavigate();
 
   React.useEffect(() =>{
+    document.title = "Alertas de consumo | Luminous";
     axios.get(`${BASE_URL}consumption-alert/getAll/address/${currentAddress.id}`, {
       headers: {
         authorization: `Bearer ${token}`,
@@ -25,7 +26,6 @@ const ConsumptionAlert = () => {
         "Content-type": "application/json",
       },
     }).then((response) => {
-      console.log(response);
       setConsumptionAlerts(response.data)});
   },[])
 
