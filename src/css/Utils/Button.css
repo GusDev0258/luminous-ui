@@ -73,3 +73,51 @@
   border: 0;
   border-radius: 4px;
 }
+
+.btns-address{
+  margin-left: auto;
+  display: flex;
+  gap: 15px;
+  margin-top: 12px;
+}
+
+.btn-address-delete{
+  width: 50px;
+  background: #DC2626;
+  color: #FAFAFA;
+  border-radius: 8px;
+  border: 0;
+}
+
+.btn-address-edit{
+  width: 50px;
+  background: #84CC16;
+  color: #FAFAFA;
+  border-radius: 8px;
+  border: 0;
+}
+
+.btns-address-modal{
+  margin-left: auto;
+  display: flex;
+  gap: 15px;
+  margin-top: 12px;
+}
+
+.btn-address-modal-delete{
+  width: 80px;
+  height: 35px;
+  background: #DC2626;
+  color: #FAFAFA;
+  border-radius: 8px;
+  border: 0;
+}
+
+.btn-address-modal-cancelar{
+  width: 80px;
+  height: 35px;
+  background: #7d8374;
+  color: #FAFAFA;
+  border-radius: 8px;
+  border: 0;
+}

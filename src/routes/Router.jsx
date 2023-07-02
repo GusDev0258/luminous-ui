@@ -18,6 +18,8 @@ import Tip from "../view/tip/Tip";
 import PasswordRecover from "../view/password/PasswordRecover";
 import PasswordSent from "../view/password/PasswordSent";
 import PasswordReset from "../view/password/PasswordReset";
+import AddressCadastro from "../view/Address/AddressCadastro";
+import AddressEditar from "../view/Address/AddressEditar";
 
 export default function Router() {
   return (
@@ -40,9 +42,11 @@ export default function Router() {
         <Route path="/password/recover" element={<PasswordRecover />}/>
         <Route path="/password/sent" element={<PasswordSent />}/>
         <Route path="/password/reset" element={<PasswordReset />}/>
+        <Route path="/address/cadastro" element={<AddressCadastro />}/>
+        <Route path="/address/alterar/:id" element={<AddressEditar />} />
       </Routes>
       </CurrentAddressProvider>
-      {/* <AuthVerify /> */}
+      <AuthVerify />
     </AddressContextProvider>
   );
 }
