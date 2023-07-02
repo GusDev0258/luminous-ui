@@ -7,7 +7,6 @@ import errorImage from "../../images/noRegistersImage.svg";
 import EnergyBillItem from "./EnergyBillItem";
 import energyBillImageDeco from "../../images/decoEnergyBill.svg";
 import axios from "axios";
-import { AddressContext } from "../../states/AddressContext";
 import useToken from "../app/useToken";
 import { CurrentAddressContext } from "../../states/CurrentAddressContext";
 import { BASE_URL } from "../../api/DefaultUrl";
@@ -21,16 +20,24 @@ const EnergyBill = () => {
     state: true,
   });
   const navigate = useNavigate();
-  const { currentAddress, setCurrentAddress } = React.useContext(
+  const { currentAddress } = React.useContext(
     CurrentAddressContext
   );
   const { token } = useToken();
 
+  const removeEnergyBill = (id) => {
+    setEnergyBills((energyBills) => {
+      return energyBills.filter((energyBill) => energyBill.id !== id);
+    })
+  }
+
+
   React.useEffect(() => {
-    async function getAllEnergyBills(addressId) {
+    console.log(currentAddress);
+    async function getAllEnergyBills() {
       try {
         const response = await axios.get(
-          `${BASE_URL}energyBill/getAll/${addressId}`,
+          `${BASE_URL}energyBill/getAll/${currentAddress.id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -40,10 +47,7 @@ const EnergyBill = () => {
           }
         );
         const responseData = response.data;
-        console.log(responseData);
-        setCurrentAddress(responseData[0].address);
         setEnergyBills(responseData);
-        console.log(responseData);
       } catch (Error) {
         setError({
           message: "Erro ao carregar faturas",
@@ -52,19 +56,7 @@ const EnergyBill = () => {
         });
       }
     }
-    if (currentAddress !== undefined) {
-      getAllEnergyBills(currentAddress.id);
-    } else {
-      console.log("entrou aqui");
-      const params = new Proxy(new URLSearchParams(window.location.search), {
-        get: (searchParams, prop) => searchParams.get(prop),
-      });
-      const addressId = params.address;
-      const secondRequest = async (id) => {
-        getAllEnergyBills(id);
-      };
-      secondRequest(addressId);
-    }
+    getAllEnergyBills();
   }, []);
 
   return (
@@ -104,7 +96,7 @@ const EnergyBill = () => {
           </ul>
         )}
 
-        {energyBills !== {} && (
+        {energyBills.length !== 0 && (
           <ul className="default-item-list">
             {energyBills.map((energyBill) => (
               <EnergyBillItem
@@ -114,6 +106,7 @@ const EnergyBill = () => {
                 consumptionkWh={energyBill.energyConsumption_kWh}
                 id={energyBill.id}
                 key={energyBill.id}
+                onEnergyBillDelete={removeEnergyBill}
               />
             ))}
           </ul>
@@ -131,7 +124,7 @@ const EnergyBill = () => {
           className="primary-button btn-cadastrar"
           type="button"
           onClick={() =>
-            navigate(`/energyBill/cadastro/?address=${currentAddress.id}`)
+            navigate(`/energyBill/cadastro/`)
           }
         >
           <PlusCircle size={24} />

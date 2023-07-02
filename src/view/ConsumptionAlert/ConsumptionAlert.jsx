@@ -1,16 +1,44 @@
 import React from "react";
 import DefaultInput from "../utils/Form/DefaultInput";
-import { MagnifyingGlass } from "@phosphor-icons/react";
+import { MagnifyingGlass, PlusCircle } from "@phosphor-icons/react";
 import ConsumptionAlertItem from "./ConsumptionAlertItem";
+import Header from "../utils/Header";
+import useToken from "../app/useToken";
+import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../../api/DefaultUrl";
+import axios from "axios";
 import { CurrentAddressContext } from "../../states/CurrentAddressContext";
 
 const ConsumptionAlert = () => {
+
   const [search, setSearch] = React.useState();
   const [consumptionAlerts, setConsumptionAlerts] = React.useState([]);
-  const {currentAddress} = React.useContext(CurrentAddressContext);
+  const { token } = useToken();
+  const { currentAddress } = React.useContext(CurrentAddressContext);
+  const navigate = useNavigate();
+
+  React.useEffect(() =>{
+    axios.get(`${BASE_URL}consumption-alert/getAll/address/${currentAddress.id}`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+        Accept: "application/json",
+        "Content-type": "application/json",
+      },
+    }).then((response) => {
+      console.log(response);
+      setConsumptionAlerts(response.data)});
+  },[])
+
+  const removeConsumptionAlert = (id) => {
+    setConsumptionAlerts((consumptionAlerts) => {
+      return consumptionAlerts.filter((consumptionAlert) => consumptionAlert.id !== id);
+    })
+  }
+
 
   return (
     <div>
+      <Header textContent="Alertas de consumo" />
       <section className="default-form-container">
         <form className="form-container">
           <DefaultInput
@@ -29,17 +57,29 @@ const ConsumptionAlert = () => {
             <ul className="default-item-list">
             {consumptionAlerts.map((consumptionAlert) => (
               <ConsumptionAlertItem
-                address={currentAddress.houseNumber}
-                description={consumptionAlert.description}
+                description={consumptionAlert.descricao}
                 consumption={consumptionAlert.consumptionLimit}
-                type={consumptionAlert.type}
+                type={consumptionAlert.consumptionAlertType}
                 id={consumptionAlert.id}
                 key={consumptionAlert.id}
+                onConsumptionAlertDelete={removeConsumptionAlert}
               />
             ))}
           </ul>
           )}
       </section>
+      <div className="btn-container">
+        <button
+          className="primary-button btn-cadastrar"
+          type="button"
+          onClick={() =>
+            navigate(`/consumption-alert/cadastro/`)
+          }
+        >
+          <PlusCircle size={24} />
+          Cadastrar Alerta
+        </button>
+      </div>
     </div>
   );
 };
