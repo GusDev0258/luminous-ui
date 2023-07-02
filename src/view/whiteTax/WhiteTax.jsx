@@ -19,6 +19,8 @@ export default function WhiteTax() {
   const [prices, setPrices] = useState(Array(48).fill(0));
   const [regularPrice, setRegularPrices] = useState(Array(48).fill(0));
   const [BGColor, setBGColor] = useState(Array(48).fill(RED_COLOR));
+
+  
   const labels = [
     "00:00",
     "00:30",
