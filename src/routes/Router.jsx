@@ -11,6 +11,7 @@ import Profile from "../view/profile/Profile";
 import EnergyBill from "../view/energyBill/EnergyBill";
 import EnergyBillCadastro from "../view/energyBill/EnergyBillCadastro";
 import { CurrentAddressProvider } from "../states/CurrentAddressContext";
+import TariffFlag from "../view/TariffFlag/TariffFlag";
 
 export default function Router() {
   return (
@@ -24,6 +25,7 @@ export default function Router() {
         <Route path="/white-taxes" element={<WhiteTax />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/tariff-flag" element={<TariffFlag />} />
         <Route path="/energyBill/" element={<EnergyBill/>}/>
         <Route path="/energyBill/cadastro/" element={<EnergyBillCadastro/>}/>
       </Routes>
