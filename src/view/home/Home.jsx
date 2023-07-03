@@ -14,7 +14,7 @@ export default function Home() {
 
   useEffect(() => {
     async function requestAddresses() {
-      const response = await getAddressByUser(token, payload);
+      const response = await getAddressByUser(token, payload.id);
       return response;
     }
     requestAddresses().then((data) => {

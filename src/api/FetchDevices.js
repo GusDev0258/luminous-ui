@@ -1,8 +1,9 @@
 import { BASE_URL } from "./DefaultUrl";
 
-export async function createAddressByUser(token, { id }) {
-  const response = await fetch(`${BASE_URL}address/user/${id}`, {
-    method: "POST",
+
+export async function getDevicesOfAddress(token, id ) {
+  const response = await fetch(`${BASE_URL}device/all/address/${id}`, {
+    method: "GET",
     headers: {
       Accept: "application/json",
       Authorization: `Bearer ${token}`,
@@ -12,8 +13,8 @@ export async function createAddressByUser(token, { id }) {
   return response;
 }
 
-export async function getAddressByUser(token, addressId){
-  const response = await fetch(`${BASE_URL}address/user/${addressId}`, {
+/*export async function getAddressById(token, addressId){
+  const response = await fetch(`${BASE_URL}address/${addressId}`, {
     method: "GET",
     headers: {
       Accept: "application/json",
@@ -64,4 +65,4 @@ export async function updateAddressById(token, userId, addressId, addressData) {
     const errorData = await response.json();
     throw new Error(errorData.message || "Erro ao atualizar endereço do usuário");
   }
-}
+}*/

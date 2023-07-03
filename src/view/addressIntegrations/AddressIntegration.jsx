@@ -2,8 +2,7 @@ import React from 'react'
 import Header from '../utils/Header';
 import Integration from './Integration';
 import '../../css/Integration/integration.css';
-import axios from 'axios';
-import {getAddressById} from '../../api/FetchAddress';
+import {getAddressByUser} from '../../api/FetchAddress';
 import useToken from '../app/useToken';
 import { CurrentAddressContext } from '../../states/CurrentAddressContext';
 
@@ -17,7 +16,7 @@ const AddressIntegration = () => {
 
   React.useEffect(() =>{
     const getAddress = async (token, addressId) =>{
-      const response = await getAddressById(token, addressId);
+      const response = await getAddressByUser(token, addressId);
       await setCurrentAddress(response);
     }
     getAddress(token, addressId);
@@ -30,7 +29,7 @@ const AddressIntegration = () => {
         <ul className="integration-list">
           <Integration url={`/energyBill/`} text="Faturas"/>
           <Integration url={`/consumption-alert/`} text="Alertas de consumo"/>
-          <Integration url={`/devices/`} text="Equipamentos"/>
+          <Integration url={`/devices/?address=${addressId}`} text="Equipamentos"/>
         </ul>
       </section>
     </>
