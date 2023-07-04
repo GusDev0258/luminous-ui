@@ -2,8 +2,6 @@ import React from "react";
 import { Trash, PencilSimple } from "@phosphor-icons/react";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { BASE_URL } from "../../api/DefaultUrl";
 import useToken from "../app/useToken";
 import { deleteEnergyBillById } from "../../api/FetchEnergyBills";
 

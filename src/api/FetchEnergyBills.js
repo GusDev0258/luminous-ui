@@ -35,6 +35,7 @@ export const registerEnergyBill = async (
       },
     }
   );
+  return response;
 };
 
 export const uploadBillFile = async (formData, token) => {
