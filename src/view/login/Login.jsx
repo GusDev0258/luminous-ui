@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -13,6 +13,10 @@ export default function Login() {
   const [unauthorized, setUnauthorized] = useState(false);
   const { setToken } = useToken();
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    document.title = "Login | Luminous";
+  }, []);
 
   const schema = yup
     .object()

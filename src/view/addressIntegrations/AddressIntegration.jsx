@@ -16,6 +16,7 @@ const AddressIntegration = () => {
   const {token} = useToken();
 
   React.useEffect(() =>{
+    document.title = "Integrações | Luminous";
     const getAddress = async (token, addressId) =>{
       const response = await getAddressById(token, addressId);
       await setCurrentAddress(response);
