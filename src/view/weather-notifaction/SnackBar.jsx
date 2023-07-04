@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from "react";
-import useToken from "../app/useToken";
+import useToken from "../../states/useToken";
 import { getWeatherTips } from "../../api/FetchWeatherTip";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

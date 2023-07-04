@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import useToken from '../app/useToken';
+import useToken from '../../states/useToken';
 
 export default function AuthVerify() {
   const {payload} = useToken();

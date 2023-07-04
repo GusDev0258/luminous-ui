@@ -1,4 +1,4 @@
-import useToken from "../app/useToken";
+import useToken from "../../states/useToken";
 import useWhiteTax from "./useTax";
 import "chart.js/auto";
 import { Chart } from "react-chartjs-2";
@@ -125,7 +125,7 @@ export default function WhiteTax() {
   if (!whiteTaxes) {
     (async () => {
       const data = await getWhiteTaxes(token);
-      setWhiteTaxes({whiteTaxes: data});
+      setWhiteTaxes({ whiteTaxes: data });
       setCompany(data[0]);
     })();
     return <Loading />;
@@ -157,8 +157,8 @@ export default function WhiteTax() {
         <div className="chart-container">
           <Chart
             type="bar"
-            options={{maintainAspectRatio: false}}
-            style={{display: "block", width: "1572px", height: "663px"}}
+            options={{ maintainAspectRatio: false }}
+            style={{ display: "block", width: "1572px", height: "663px" }}
             data={{
               labels: labels,
               datasets: [

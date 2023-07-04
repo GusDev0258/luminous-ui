@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
-import useToken from "../app/useToken";
+import useToken from "../../states/useToken";
 import { getUser, updateUser } from "../../api/FetchUser";
 import Loading from "../loading/Loading";
 import * as yup from "yup";
@@ -49,9 +49,9 @@ export default function Profile() {
     return (
       <Fragment>
         <div className="default-form-container">
-        <h1>Meu Perfil</h1>
-        <h1 className="primary-title">{user.userName}</h1>
-        <h2>Informações do usuário</h2>
+          <h1>Meu Perfil</h1>
+          <h1 className="primary-title">{user.userName}</h1>
+          <h2>Informações do usuário</h2>
           <form onSubmit={handleSubmit((e) => updateUserData(e))}>
             <label className="control-label">
               <p>Nome</p>
@@ -73,8 +73,7 @@ export default function Profile() {
             </label>
             <label className="control-label">
               <p>Senha</p>
-              <input type="password" className="default-form-input"
- />
+              <input type="password" className="default-form-input" />
             </label>
             <label className="control-label">
               <p>Data de nascimento</p>a
@@ -100,9 +99,8 @@ export default function Profile() {
             </label>
             <button type="submit">Atualizar dados</button>
           </form>
-
         </div>
-          <DeleteModal/>
+        <DeleteModal />
       </Fragment>
     );
   }

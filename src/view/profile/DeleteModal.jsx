@@ -1,33 +1,35 @@
 import { Fragment, useState } from "react";
-import Modal from 'react-modal';
+import Modal from "react-modal";
 import { deleteUser } from "../../api/FetchUser";
-import useToken from "../app/useToken";
+import useToken from "../../states/useToken";
 import { useNavigate } from "react-router-dom";
 import { clearLocalStorage, clearSessionStorage } from "../../utils/cleaner";
 
 export default function DeleteModal() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const navigate = useNavigate();
-    const { token, payload } = useToken();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
+  const { token, payload } = useToken();
 
-    const deleteAccount = async () => {
-        await deleteUser(token, payload);
-        navigate("/login");
-        clearLocalStorage();
-        clearSessionStorage();
-    }
+  const deleteAccount = async () => {
+    await deleteUser(token, payload);
+    navigate("/login");
+    clearLocalStorage();
+    clearSessionStorage();
+  };
 
-    const openModal = () => {
-        setIsModalOpen(true);
-      };
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
 
-      const closeModal = () => {
-        setIsModalOpen(false);
-      };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
-    return (
+  return (
     <div className="btn-delete-container">
-      <button className="btn-delete"  type="button" onClick={openModal}>Excluir conta</button>
+      <button className="btn-delete" type="button" onClick={openModal}>
+        Excluir conta
+      </button>
       <Modal
         isOpen={isModalOpen}
         onRequestClose={closeModal}
@@ -39,7 +41,5 @@ export default function DeleteModal() {
         <button onClick={deleteAccount}>Deletar mesmo assim</button>
       </Modal>
     </div>
-    );
-  };
-
-
+  );
+}
