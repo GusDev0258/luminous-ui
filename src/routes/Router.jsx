@@ -22,6 +22,7 @@ import PasswordReset from "../view/password/PasswordReset";
 import AddressCadastro from "../view/Address/AddressCadastro";
 import AddressEditar from "../view/Address/AddressEditar";
 import Devices from "../view/devices/Devices";
+import DeviceCadastro from "../view/devices/DeviceCadastro";
 
 export default function Router() {
   return (
@@ -48,6 +49,7 @@ export default function Router() {
         <Route path="/address/cadastro" element={<AddressCadastro />}/>
         <Route path="/address/alterar/:id" element={<AddressEditar />} />
         <Route path="/devices" element={<Devices />} />
+        <Route path="/devices/cadastro" element={<DeviceCadastro />} />
 
       </Routes>
       </CurrentAddressProvider>

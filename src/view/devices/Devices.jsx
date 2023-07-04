@@ -1,10 +1,11 @@
-import { Fragment, useContext, useState } from "react";
+import { Fragment, useState } from "react";
 import Header from "../utils/Header";
 import useToken from "../app/useToken";
 import { useNavigate } from "react-router-dom";
 import { getDevicesOfAddress } from "../../api/FetchDevices";
 import Loading from "../loading/Loading";
-import { CurrentAddressContext } from "../../states/CurrentAddressContext";
+import { PlusCircle } from "@phosphor-icons/react";
+
 
 export default function Devices() {
 
@@ -35,14 +36,23 @@ export default function Devices() {
                             <p>
                                {device.power}W - {device.consumptionKWh.toFixed(2)}kWh
                             </p>
-                            <button type="button">minha piroca</button>
+                            <button type="button">Configurações</button>
                         </div>
                     ))}
                 </div>
-                <div>
-                    <button type="button">Adicionar um equipamento</button>
+                <div className="btn-container">
+                    <button
+                    className="primary-button btn-cadastrar"
+                    type="button"
+                    onClick={() =>
+                        navigate(`/devices/cadastro/`)
+                    }
+                    >
+                    <PlusCircle size={20} />
+                    Cadastrar Equipamento
+                        </button>
                 </div>
-            </Fragment>
+        </Fragment>
         )
       }
 

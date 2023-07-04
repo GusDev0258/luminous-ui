@@ -13,7 +13,7 @@
     align-items: center;
     justify-content: center;
     padding: 20px;
-    background-color: #f5f5f5;
+    background-color: #ffd95a;
     border-radius: 10px;
     margin: 10px;
     margin-top: 20px;
@@ -23,7 +23,7 @@
     &:hover{
         transform: scale(1.05);
     }
-    font-weight: bold;
+    font-weight: default;
     color: #404040;
     text-decoration: none;
 }

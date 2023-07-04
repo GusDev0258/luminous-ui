@@ -70,7 +70,7 @@ const AddressEditar = () => {
 
   return (
     <div>
-      <Header textContent="Cadastrar Endereço" />
+      <Header textContent="Atualizar Endereço" />
       <section className="default-form-container">
       <form onSubmit={handleSubmit}>
         <DefaultInput

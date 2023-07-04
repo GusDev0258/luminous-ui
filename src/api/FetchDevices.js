@@ -1,6 +1,5 @@
 import { BASE_URL } from "./DefaultUrl";
 
-
 export async function getDevicesOfAddress(token, id ) {
   const response = await fetch(`${BASE_URL}device/all/address/${id}`, {
     method: "GET",
@@ -13,21 +12,8 @@ export async function getDevicesOfAddress(token, id ) {
   return response;
 }
 
-/*export async function getAddressById(token, addressId){
-  const response = await fetch(`${BASE_URL}address/${addressId}`, {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-  });
-  const result = await response.json();
-  return result;
-}
-
-export async function deleteAddressesOfUser(token, id, addressId) {
-  const response = await fetch(`${BASE_URL}address/${addressId}/user/${id}`, {
+export async function deleteDevice(token, id, addressId) {
+  const response = await fetch(`${BASE_URL}${id}/address/${addressId}`, {
     method: "DELETE",
     headers: {
       Accept: "application/json",
@@ -37,17 +23,15 @@ export async function deleteAddressesOfUser(token, id, addressId) {
   });
 
   if (response.ok) {
-    // Exclusão bem-sucedida
     return true;
   } else {
-    // Tratar erros de exclusão
     const errorData = await response.json();
-    throw new Error(errorData.message || "Erro ao excluir endereço do usuário");
+    throw new Error(errorData.message || "Erro ao excluir o equipamento");
   }
 }
 
-export async function updateAddressById(token, userId, addressId, addressData) {
-  const response = await fetch(`${BASE_URL}address/${addressId}/user/${userId}`, 
+export async function updateDevice(token, addressId, deviceId, deviceData) {
+  const response = await fetch(`${BASE_URL}${deviceId}/address/${addressId}`, 
   {
     method: "PUT",
     headers: {
@@ -55,7 +39,7 @@ export async function updateAddressById(token, userId, addressId, addressData) {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(addressData),
+    body: JSON.stringify(deviceData),
   });
 
   if (response.ok) {
@@ -63,6 +47,6 @@ export async function updateAddressById(token, userId, addressId, addressData) {
     return result;
   } else {
     const errorData = await response.json();
-    throw new Error(errorData.message || "Erro ao atualizar endereço do usuário");
+    throw new Error(errorData.message || "Erro ao atualizar o equipamento");
   }
-}*/
+}
