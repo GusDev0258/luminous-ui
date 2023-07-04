@@ -5,7 +5,12 @@ import axios from "axios";
 import useToken from "../app/useToken";
 import { useNavigate } from "react-router-dom";
 import { CurrentAddressContext } from "../../states/CurrentAddressContext";
-import { BASE_URL } from "../../api/DefaultUrl";
+import {
+  registerEnergyBill,
+  uploadBillFile,
+  updateEnergyBill,
+  getEnergyBillById,
+} from "../../api/FetchEnergyBills";
 
 const EnergyBillCadastro = () => {
   const [referenceDate, setReferenceDate] = React.useState("");
@@ -31,87 +36,67 @@ const EnergyBillCadastro = () => {
       handleFileUpload();
     }
     if (energyBillId) {
-      axios
-        .get(`${BASE_URL}energyBill/${energyBillId}`, {
-          headers: {
-            authorization: `Bearer ${token}`,
-            Accept: "application/json",
-            "Content-type": "application/json",
-          },
-        })
-        .then((response) => {
-          setEnergyBillToEdit(response.data);
-          setReferenceDate(response.data.referenceDate);
-          setDueDate(response.data.dueDate);
-          setEnergyConsumptionReais(response.data.energyConsumptionReais);
-          setEnergyConsumption_kWh(response.data.energyConsumption_kWh);
-        });
+      getEnergyBillToUpdate(energyBillId, token);
     }
   }, [file]);
 
-  const handleEnergyBillEdit = (event) => {
+  const getEnergyBillToUpdate = async (energyBillId, token) => {
+    const requiredEnergyBill = await getEnergyBillById(energyBillId, token);
+    await loadEnergyBillDate(requiredEnergyBill);
+  };
+
+  const loadEnergyBillDate = (energyBill) => {
+    setEnergyBillToEdit(energyBill);
+    setReferenceDate(energyBill.referenceDate);
+    setDueDate(energyBill.dueDate);
+    setEnergyConsumptionReais(energyBill.energyConsumptionReais);
+    setEnergyConsumption_kWh(energyBill.energyConsumption_kWh);
+  };
+
+  const handleEnergyBillEdit = async (event) => {
     event.preventDefault();
+    const energyBillData = {
+      referenceDate,
+      dueDate,
+      energyConsumptionReais,
+      energyConsumption_kWh,
+      fileId,
+    };
     if (energyBillId) {
-      axios.put(
-        `${BASE_URL}energyBill/${energyBillId}`,
-        {
-          referenceDate,
-          dueDate,
-          energyConsumptionReais,
-          energyConsumption_kWh,
-          fileId,
-        },
-        {
-          headers: {
-            authorization: `Bearer ${token}`,
-            Accept: "application/json",
-            "Content-type": "application/json",
-          },
-        }
-      );
-      navigate(`/energyBill/`);
+      await updateEnergyBill(energyBillId, energyBillData, token).then(() => {
+        navigate(`/energyBill/`);
+      });
     }
   };
 
-  const handleFile = async ({ target }) => {
+  const handleFile = ({ target }) => {
     setFile(target.files[0]);
   };
+
   const handleFileUpload = async () => {
     const formData = new FormData();
 
     formData.append("file", file);
 
-    const response = await axios.post(`${BASE_URL}billFile/upload`, formData, {
-      headers: {
-        authorization: `Bearer ${token}`,
-        Accept: "application/json",
-        "Content-type": "multipart/form-data",
-      },
-    });
-    await setFileId(response.data);
+    const uploadedFileId = await uploadBillFile(formData, token);
+    setFileId(uploadedFileId);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await axios
-      .post(
-        `${BASE_URL}energyBill/address/${currentAddress.id}/billFile/${fileId}`,
-        {
-          referenceDate,
-          dueDate,
-          energyConsumptionReais,
-          energyConsumption_kWh,
-          fileId,
-        },
-        {
-          headers: {
-            authorization: `Bearer ${token}`,
-            Accept: "application/json",
-            "Content-type": "application/json",
-          },
-        }
-      )
-      .then(() => navigate(`/energyBill/?address=${currentAddress.id}`));
+    const energyBillData = {
+      referenceDate,
+      dueDate,
+      energyConsumptionReais,
+      energyConsumption_kWh,
+      fileId,
+    };
+    await registerEnergyBill(
+      currentAddress.id,
+      fileId,
+      energyBillData,
+      token
+    ).then(() => navigate(`/energyBill/?address=${currentAddress.id}`));
   };
   if (energyBillId) {
     return (

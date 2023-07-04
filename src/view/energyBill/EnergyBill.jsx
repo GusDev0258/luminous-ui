@@ -9,7 +9,7 @@ import energyBillImageDeco from "../../images/decoEnergyBill.svg";
 import axios from "axios";
 import useToken from "../app/useToken";
 import { CurrentAddressContext } from "../../states/CurrentAddressContext";
-import { BASE_URL } from "../../api/DefaultUrl";
+import { fetchAllEnergyBills } from "../../api/FetchEnergyBills";
 
 const EnergyBill = () => {
   const [search, setSearch] = React.useState("");
@@ -34,29 +34,19 @@ const EnergyBill = () => {
 
   React.useEffect(() => {
     document.title = "Minhas Faturas | Luminous";
-    async function getAllEnergyBills() {
-      try {
-        const response = await axios.get(
-          `${BASE_URL}energyBill/getAll/${currentAddress.id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-              Accept: "application/json",
-            },
-          }
-        );
-        const responseData = response.data;
-        setEnergyBills(responseData);
-      } catch (Error) {
+    const getEnergyBills = async () => {
+      try{ 
+        const data = await fetchAllEnergyBills(currentAddress.id, token);
+        await setEnergyBills(data);
+      }catch (error) {
         setError({
           message: "Erro ao carregar faturas",
-          code: Error,
+          code: error.response.status,
           state: false,
         });
       }
     }
-    getAllEnergyBills();
+    getEnergyBills();
   }, []);
 
   return (

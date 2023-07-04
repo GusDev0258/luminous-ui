@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BASE_URL } from "../../api/DefaultUrl";
 import useToken from "../app/useToken";
+import { deleteEnergyBillById } from "../../api/FetchEnergyBills";
 
 const EnergyBillItem = ({
   id,
@@ -20,14 +21,8 @@ const EnergyBillItem = ({
   function handleEdit(){
     navigate(`/energyBill/cadastro/?energyBill=${id}`)
   }
-  function handleDelete(){
-    axios.delete(`${BASE_URL}energyBill/${id}`,{
-      headers: {
-        authorization: `Bearer ${token}`,
-        Accept: "application/json",
-        "Content-type": "application/json",
-      },
-    }).then(() =>{
+  async function handleDelete(){
+    await deleteEnergyBillById(id, token).then(() =>{
       props.onEnergyBillDelete(id);
     }).catch((error) => console.log(error)); 
   }
