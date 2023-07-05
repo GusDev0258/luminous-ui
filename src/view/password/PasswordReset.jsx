@@ -12,6 +12,12 @@ const PasswordReset = () => {
   const navigate = useNavigate();
   const [tokenParam, setTokenParam] = useSearchParams();
   
+  React.useEffect(() => {
+    document.title = 'Mudar senha | Luminous';
+    if(tokenParam.get("token") === null){
+      navigate("/login");
+    }
+  },[])
 
   const handleSubmit = async () => {
     if(password === confirmPassword){

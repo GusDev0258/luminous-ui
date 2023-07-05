@@ -24,6 +24,7 @@ const ConsumptionAlertCadastro = () => {
 
 
   React.useEffect(() =>{
+    document.title = "Cadastro de Alerta de Consumo | Luminous";
     if (consumptionAlertId) {
       axios
         .get(`${BASE_URL}consumption-alert/${consumptionAlertId}`, {

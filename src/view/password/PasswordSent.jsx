@@ -7,6 +7,11 @@ import '../../css/Password/Password.css';
 
 const PasswordSent = () => {
   const navigate = useNavigate('/login');
+
+  React.useEffect(() => {
+    document.title = 'Email enviado | Luminous';
+  },[])
+
   return (
     <div className="recover-container">
       <img src={Logo} alt="logo" className="logo" />

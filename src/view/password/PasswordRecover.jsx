@@ -10,6 +10,10 @@ const PasswordRecover = () => {
   const [email, setEmail] = React.useState("");
   const navigate = useNavigate();
 
+  React.useEffect(() => {
+    document.title = 'Recuperar senha | Luminous';
+  },[])
+
   const handleSubmit = async (event) =>{
     event.preventDefault();
     await axios.post(`${BASE_URL}auth/password-recovery`, {
