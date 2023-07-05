@@ -66,7 +66,7 @@ const DeviceCadastro = () => {
         />
         
           <button type="submit" className="primary-button btn-equipmamento">
-            Cadastrar
+            Atualizar Dispositivo
           </button>
           </form>
           </section>
