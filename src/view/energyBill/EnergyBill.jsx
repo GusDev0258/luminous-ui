@@ -1,14 +1,15 @@
 import React from "react";
-import DefaultInput from "../utils/form/DefaultInput";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import DefaultInput from "../utils/Form/DefaultInput";
+import { useNavigate } from "react-router-dom";
 import { MagnifyingGlass, PlusCircle } from "@phosphor-icons/react";
 import Header from "../utils/Header";
-import axios from "axios";
 import errorImage from "../../images/noRegistersImage.svg";
 import EnergyBillItem from "./EnergyBillItem";
 import energyBillImageDeco from "../../images/decoEnergyBill.svg";
+import axios from "axios";
 import useToken from "../app/useToken";
-import useAddress from "../utils/useAddress";
+import { CurrentAddressContext } from "../../states/CurrentAddressContext";
+import { fetchAllEnergyBills } from "../../api/FetchEnergyBills";
 
 const EnergyBill = () => {
   const [search, setSearch] = React.useState("");
@@ -19,45 +20,35 @@ const EnergyBill = () => {
     state: true,
   });
   const navigate = useNavigate();
+  const { currentAddress } = React.useContext(
+    CurrentAddressContext
+  );
   const { token } = useToken();
-  const [address, setAddress] = useAddress();
-  const [loading, setLoading] = React.useState(true);
+
+  const removeEnergyBill = (id) => {
+    setEnergyBills((energyBills) => {
+      return energyBills.filter((energyBill) => energyBill.id !== id);
+    })
+  }
+
 
   React.useEffect(() => {
-    async function requestAllEnergyBills() {
-      try {
-        const response = await axios.get(
-          `http://localhost:8080/api/energyBill/getAll/${address}`,
-          {
-            headers: {
-              authorization: `Bearer ${token}`,
-              Accept: "application/json",
-              "Content-type": "application/json",
-            },
-          }
-        );
-        return response.data;
-      } catch (error) {
+    document.title = "Minhas Faturas | Luminous";
+    const getEnergyBills = async () => {
+      try{ 
+        const data = await fetchAllEnergyBills(currentAddress.id, token);
+        await setEnergyBills(data);
+      }catch (error) {
         setError({
-          message: error.message,
-          code: error.code,
+          message: "Erro ao carregar faturas",
+          code: error.response.status,
           state: false,
         });
-        return null;
       }
     }
-
-    requestAllEnergyBills().then((response) => {
-      if (response !== null) {
-        console.log(response.data);
-        setEnergyBills(response.data);
-      }
-      setLoading(false); 
-    });
+    getEnergyBills();
   }, []);
-  if(loading){
-    return (<div>Loading Bills...</div>)
-  }
+
   return (
     <div>
       <Header textContent="Minhas Faturas" />
@@ -80,32 +71,32 @@ const EnergyBill = () => {
           <ul className="image-list">
             <li key={error.code}>
               <img src={errorImage} alt="Error" />
-              {error.message === "Network Error" &&
-                "Verifique sua Conexão com a internet"}
+              {error.message === "Erro ao carregar faturas" &&
+                "Estamos passando por problemas técnicos..."}
             </li>
           </ul>
         )}
 
-        {energyBills &&
-          energyBills.length === 0 &&
-          error.state !== false && (
-            <ul className="image-list">
-              <li key={error.code}>
-                <img src={errorImage} alt="Error" />
-                {"Nenhuma fatura até o momento... :("}
-              </li>
-            </ul>
-          )}
+        {energyBills && energyBills.length === 0 && error.state !== false && (
+          <ul className="image-list">
+            <li key={error.code}>
+              <img src={errorImage} alt="Error" />
+              {"Nenhuma fatura até o momento... :("}
+            </li>
+          </ul>
+        )}
 
-        {energyBills !== [] && energyBills.length > 0 && (
+        {energyBills.length !== 0 && (
           <ul className="default-item-list">
             {energyBills.map((energyBill) => (
               <EnergyBillItem
-                address={energyBill.address.houseNumber}
+                address={currentAddress.houseNumber}
                 dueDate={energyBill.dueDate}
                 consumptionReais={energyBill.energyConsumptionReais}
                 consumptionkWh={energyBill.energyConsumption_kWh}
                 id={energyBill.id}
+                key={energyBill.id}
+                onEnergyBillDelete={removeEnergyBill}
               />
             ))}
           </ul>
@@ -122,7 +113,9 @@ const EnergyBill = () => {
         <button
           className="primary-button btn-cadastrar"
           type="button"
-          onClick={() => navigate(`/energyBill/cadastro/?address=${address}`)}
+          onClick={() =>
+            navigate(`/energyBill/cadastro/`)
+          }
         >
           <PlusCircle size={24} />
           Cadastrar Fatura

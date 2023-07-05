@@ -4,6 +4,8 @@ import { deleteUser } from "../../api/FetchUser";
 import useToken from "../../states/useToken";
 import { useNavigate } from "react-router-dom";
 import { clearLocalStorage, clearSessionStorage } from "../../utils/cleaner";
+import { UserCircleMinus } from "phosphor-react";
+
 
 export default function DeleteModal() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,9 +29,8 @@ export default function DeleteModal() {
 
   return (
     <div className="btn-delete-container">
-      <button className="btn-delete" type="button" onClick={openModal}>
-        Excluir conta
-      </button>
+
+      <button className="btn-delete"  type="button" onClick={openModal}><UserCircleMinus size={32} />Excluir conta</button>
       <Modal
         isOpen={isModalOpen}
         onRequestClose={closeModal}

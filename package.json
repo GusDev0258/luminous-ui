@@ -26,6 +26,7 @@
     "react-toastify": "^9.1.3",
     "reactstrap": "^9.1.8",
     "styled-components": "^5.3.9",
+    "toastify": "^2.0.1",
     "web-vitals": "^2.1.4",
     "yup": "^1.0.2"
   },
@@ -52,5 +53,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-slick": "^0.29.0",
+    "slick-carousel": "^1.8.1"
   }
 }
