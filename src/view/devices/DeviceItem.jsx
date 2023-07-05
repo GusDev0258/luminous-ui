@@ -22,9 +22,9 @@ const DeviceItem = ({ id, name, power, consumptionKWh, consumptionReais, handleC
         </div>
       </li>
     
-      <div className="btns-address">
+      <div className="btns-device">
         <button 
-          className="btn-address-edit" 
+          className="btn-device-edit" 
           type="button" 
           onClick={ handleEdit }>
           <GearSix  size={25} weight="fill" />

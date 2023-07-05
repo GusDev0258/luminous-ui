@@ -30,14 +30,16 @@ const DeleteDeviceModal = ({ token, id, addressId, ...props }) => {
       <Modal
         isOpen={isModalOpen}
         onRequestClose={closeModal}
-        contentLabel="Delete address Modal"
+        contentLabel="Delete device Modal"
+        width = "200"
+        height= "200"
       >
         <h2>Confirmação de exclusão</h2>
         <hr/>
         <p>Deseja realmente excluir este equipamento?</p>
-        <div className="btns-address-modal">
-          <button className="btn-address-modal-cancelar" onClick={closeModal}>Cancelar</button>
-          <button className="btn-address-modal-delete" onClick={DeleteDevice}>Excluir</button>
+        <div className="btns-device-modal">
+          <button className="btn-device-modal-cancelar" onClick={closeModal}>Cancelar</button>
+          <button className="btn-device-modal-delete" onClick={DeleteDevice}>Excluir</button>
         </div>
       </Modal>
     </Fragment>

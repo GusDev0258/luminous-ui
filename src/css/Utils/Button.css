@@ -121,3 +121,51 @@
   border-radius: 8px;
   border: 0;
 }
+
+.btns-device{
+  margin-left: auto;
+  display: flex;
+  gap: 15px;
+  margin-top: 12px;
+}
+
+.btn-device-delete{
+  width: 50px;
+  background: #DC2626;
+  color: #FAFAFA;
+  border-radius: 8px;
+  border: 0;
+}
+
+.btn-device-edit{
+  width: 50px;
+  background: #84CC16;
+  color: #FAFAFA;
+  border-radius: 8px;
+  border: 0;
+}
+
+.btns-device-modal{
+  margin-left: auto;
+  display: flex;
+  gap: 15px;
+  margin-top: 12px;
+}
+
+.btn-device-modal-delete{
+  width: 80px;
+  height: 35px;
+  background: #DC2626;
+  color: #FAFAFA;
+  border-radius: 8px;
+  border: 0;
+}
+
+.btn-device-modal-cancelar{
+  width: 80px;
+  height: 35px;
+  background: #7d8374;
+  color: #FAFAFA;
+  border-radius: 8px;
+  border: 0;
+}

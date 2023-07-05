@@ -1,42 +1,56 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../utils/Header";
 import DefaultInput from "../utils/Form/DefaultInput";
-import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
 import useToken from "../app/useToken";
-import { useNavigate } from "react-router-dom";
+import { updateDevice, getDevicesOfAddress } from "../../api/FetchDevices";
+
 import { BASE_URL } from "../../api/DefaultUrl";
 
-const DeviceCadastro = () => {
-    const[name, setName] = React.useState("");
-    const[power, setPower] = React.useState("");
-    const[usageTime, setUsageTime] = React.useState("01:00");
-    
-      const {token,payload} = useToken();
-      const navigate = useNavigate();
+const DeviceEditar = () => {
+  const { id } = useParams();
+  const { token, payload } = useToken();
+  const navigate = useNavigate();
 
-      const handleSubmit = async (event) => {
-        event.preventDefault();
-        await axios.post(
-            `${BASE_URL}device/address/${payload.id}`,
-        {
-            name,
-            power,
-            usageTime
-        },
-        {
-          headers: {
-            authorization: `Bearer ${token}`,
-            Accept: "application/json",
-            "Content-type": "application/json",
-          },
-        }
-      ).then(() => navigate(`/`));
+  const [name, setName] = useState("");
+  const [power, setPower] = useState("");
+  const [usageTime, setUsageTime] = useState("");
+
+  useEffect(() => {
+    const fetchDevice = async () => {
+      try {
+        const devices = await getDevicesOfAddress(token, payload);
+        const selectedDevice = devices.filter((device) => device.id === parseInt(id))[0];
+        setName(selectedDevice.name);
+        setPower(selectedDevice.power);
+        setUsageTime(selectedDevice.usageTime);
+      } catch (error) {
+        console.error("Error fetching device:", error);
+      }
     };
-    return (
-        <div>
-            <Header textContent={"Novo Dispositivo"} />
-            <section className="default-form-container">
-      <form onSubmit={handleSubmit}>
+
+    fetchDevice();
+  }, [id, token]);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      await updateDevice(token, id, payload.id, {
+        name,
+        power,
+        usageTime
+      });
+      navigate(`/`);
+    } catch (error) {
+      console.error("Error updating Device:", error);
+    }
+  };
+
+  return (
+    <div>
+        <Header textContent={"Atualizar Equipamento"} />
+        <section className="default-form-container">
+        <form onSubmit={handleSubmit}>
         <DefaultInput
           label={"Nome"}
           labelClassName={"default-input-label"}
@@ -64,15 +78,14 @@ const DeviceCadastro = () => {
           value={usageTime}
           setValue={setUsageTime}
         />
-        
-          <button type="submit" className="primary-button btn-equipmamento">
-            Atualizar Dispositivo
-          </button>
-          </form>
-          </section>
-        </div>
-    );
-}
+    
+      <button type="submit" className="primary-button btn-device">
+        Atualizar
+      </button>
+      </form>
+      </section>
+    </div>
+);
+};
 
-
-export default DeviceCadastro
+export default DeviceEditar;

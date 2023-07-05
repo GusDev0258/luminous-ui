@@ -10,8 +10,6 @@ import DeviceItem from "./DeviceItem";
 
 export default function Devices() {
 
-    
-
     const [devices, setDevices] = useState();
     const { token } = useToken();
     const navigate = useNavigate();
@@ -46,7 +44,7 @@ export default function Devices() {
                     power={device.power}
                     consumptionKWh={device.consumptionKWh.toFixed(2)}
                     consumptionReais={device.consumptionReais.toFixed(2)}
-                    handleClick={() => navigate(`/integracoes/?address=${device.id}`)}
+                    handleClick={() => navigate(`/devices/alterar/${device.id}`)}
                     handleDelete={removeDevice}
                     key={device.id}
                     /> 
