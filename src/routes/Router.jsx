@@ -20,6 +20,7 @@ import PasswordSent from "../view/password/PasswordSent";
 import PasswordReset from "../view/password/PasswordReset";
 import AddressCadastro from "../view/Address/AddressCadastro";
 import AddressEditar from "../view/Address/AddressEditar";
+import AddressConsumptionReport from "../view/Address/AddressConsumptionReport";
 
 export default function Router() {
   return (
@@ -44,6 +45,7 @@ export default function Router() {
         <Route path="/password/reset" element={<PasswordReset />}/>
         <Route path="/address/cadastro" element={<AddressCadastro />}/>
         <Route path="/address/alterar/:id" element={<AddressEditar />} />
+        <Route path="/report/address/:id" element={<AddressConsumptionReport />} />
       </Routes>
       </CurrentAddressProvider>
       <AuthVerify />

@@ -65,3 +65,26 @@ export async function updateAddressById(token, userId, addressId, addressData) {
     throw new Error(errorData.message || "Erro ao atualizar endereço do usuário");
   }
 }
+
+export async function getReportAddressById(token, addressId) {
+  try {
+    const response = await fetch(`${BASE_URL}report/address/${addressId}`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Erro ao buscar dados do relatório de consumo.");
+    }
+
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error("Erro ao buscar dados do relatório de consumo:", error);
+    throw error;
+  }
+}
