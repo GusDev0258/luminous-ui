@@ -1,4 +1,4 @@
-import useToken from "../app/useToken";
+import useToken from "../../states/useToken";
 import useWhiteTax from "./useTax";
 import "chart.js/auto";
 import { Chart } from "react-chartjs-2";
@@ -20,7 +20,7 @@ export default function WhiteTax() {
   const [regularPrice, setRegularPrices] = useState(Array(48).fill(0));
   const [BGColor, setBGColor] = useState(Array(48).fill(RED_COLOR));
 
-  
+
   const labels = [
     "00:00",
     "00:30",

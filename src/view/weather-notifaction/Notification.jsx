@@ -3,13 +3,12 @@ import { Fragment } from "react";
 export default function Notification({closeToast, toastProps, notification}) {
     return (
         <Fragment>
-            {console.log(notification)}
             <div>
-            <p>{notification.description}</p>
-            <p>{notification.city}</p>
-            <p>{notification.temperature}</p>
-            <p>{notification.feelsLike}</p>
-            <p>{notification.tip}</p>
+            <p>Descrição: {notification.description}</p>
+            <p>Cidade: {notification.city}</p>
+            <p>Temperatura: {notification.temperature}</p>
+            <p>Sensação térmica: {notification.feelsLike}</p>
+            <p>Dica: {notification.tip}</p>
           </div>
         </Fragment>
     )

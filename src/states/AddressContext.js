@@ -1,5 +1,5 @@
 import { createContext, useState } from 'react';
-import useToken from '../view/app/useToken';
+import useToken from '../states/useToken';
 
 const AddressContext = createContext();
 

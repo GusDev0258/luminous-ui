@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginUser } from "../../api/FetchUser";
 import * as yup from "yup";
-import useToken from "../app/useToken";
+import useToken from "../../states/useToken";
 import logo from "../../images/luminous-logo.svg";
 import abstractVector from "../../images/login-abstract.svg";
 
@@ -47,6 +47,7 @@ export default function Login() {
     } else {
       setUnauthorized(true);
     }
+
   }
     return (
       <div className="default-form-container">

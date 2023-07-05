@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
-import useToken from "../app/useToken";
+import useToken from "../../states/useToken";
 import { getUser, updateUser } from "../../api/FetchUser";
 import Loading from "../loading/Loading";
 import * as yup from "yup";
@@ -50,6 +50,7 @@ export default function Profile() {
     return (
       <Fragment>
         <div className="default-form-container">
+
         <h1>Meu Perfil</h1>
         <img src={ProfilePic} alt="Foto de perfil" className="profile-pic" style={{borderRadius: '50%', marginTop: '8px'}}/>
         <h1 className="primary-title">{user.userName}</h1>
@@ -75,7 +76,8 @@ export default function Profile() {
             </label>
             <label className="control-label">
               <p>Senha</p>
-              <input type="password" className="default-form-input"/>
+              <input type="password" className="default-form-input" />
+
             </label>
             <label className="control-label">
               <p>Data de nascimento</p>
@@ -101,9 +103,8 @@ export default function Profile() {
             </label>
             <button type="submit">Atualizar dados</button>
           </form>
-
         </div>
-          <DeleteModal/>
+        <DeleteModal />
       </Fragment>
     );
   }
