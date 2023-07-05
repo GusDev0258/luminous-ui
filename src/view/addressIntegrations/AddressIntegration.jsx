@@ -3,7 +3,7 @@ import Header from '../utils/Header';
 import Integration from './Integration';
 import '../../css/Integration/integration.css';
 import {getAddressByUser} from '../../api/FetchAddress';
-import useToken from '../app/useToken';
+import useToken from "../../states/useToken";
 import { CurrentAddressContext } from '../../states/CurrentAddressContext';
 
 const AddressIntegration = () => {

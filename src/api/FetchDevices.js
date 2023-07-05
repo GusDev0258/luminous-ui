@@ -1,7 +1,8 @@
 import { BASE_URL } from "./DefaultUrl";
 
-export async function getDevicesOfAddress(token, id ) {
-  const response = await fetch(`${BASE_URL}device/all/address/${id}`, {
+export async function getDevicesOfAddress(token, id) {
+  console.log(token, typeof(id));
+  const response = await fetch(`${BASE_URL}device/all/address/${"10"}`, {
     method: "GET",
     headers: {
       Accept: "application/json",
@@ -13,7 +14,7 @@ export async function getDevicesOfAddress(token, id ) {
 }
 
 export async function deleteDevice(token, id, addressId) {
-  const response = await fetch(`${BASE_URL}${id}/address/${addressId}`, {
+  const response = await fetch(`${BASE_URL}device/${id}/address/${addressId}`, {
     method: "DELETE",
     headers: {
       Accept: "application/json",
@@ -30,8 +31,8 @@ export async function deleteDevice(token, id, addressId) {
   }
 }
 
-export async function updateDevice(token, addressId, deviceId, deviceData) {
-  const response = await fetch(`${BASE_URL}${deviceId}/address/${addressId}`, 
+export async function updateDevice(token, deviceId, deviceData, addressId) {
+  const response = await fetch(`${BASE_URL}device/${deviceId}/address/${addressId}`, 
   {
     method: "PUT",
     headers: {

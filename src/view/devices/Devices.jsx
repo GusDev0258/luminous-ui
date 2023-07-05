@@ -1,22 +1,24 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useContext } from "react";
 import Header from "../utils/Header";
-import useToken from "../app/useToken";
+import useToken from "../../states/useToken";
 import { useNavigate } from "react-router-dom";
 import { getDevicesOfAddress } from "../../api/FetchDevices";
 import Loading from "../loading/Loading";
 import { PlusCircle } from "@phosphor-icons/react";
 import DeviceItem from "./DeviceItem";
+import { CurrentAddressContext } from "../../states/CurrentAddressContext";
 
 
 export default function Devices() {
 
     const [devices, setDevices] = useState();
-    const { token } = useToken();
+    const { token,  payload } = useToken();
     const navigate = useNavigate();
-    const params = new Proxy(new URLSearchParams(window.location.search), {
-        get: (searchParams, prop) => searchParams.get(prop),
-      });
-      const addressId = params.address;
+
+      const { currentAddress } = useContext(
+        CurrentAddressContext
+      );
+      console.log(currentAddress);
 
       const removeDevice = (id) => {
         setDevices((device) => {
@@ -27,7 +29,8 @@ export default function Devices() {
 
     if (!devices) {
         (async () => {
-          const data = await getDevicesOfAddress(token, addressId);
+          const data = await getDevicesOfAddress(token, currentAddress.id);
+          console.log(currentAddress.id);
           setDevices(data);
         })();
         return <Loading />;
@@ -40,11 +43,12 @@ export default function Devices() {
 
                     <DeviceItem
                     id={device.id}
+                    addressId={currentAddress.id}
                     name={device.name}
                     power={device.power}
                     consumptionKWh={device.consumptionKWh.toFixed(2)}
                     consumptionReais={device.consumptionReais.toFixed(2)}
-                    handleClick={() => navigate(`/devices/alterar/${device.id}`)}
+                   
                     handleDelete={removeDevice}
                     key={device.id}
                     /> 

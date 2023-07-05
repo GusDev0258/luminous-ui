@@ -1,15 +1,16 @@
 import { GearSix } from 'phosphor-react';
 import React from 'react';
 import DeleteDeviceModal from './DeleteDeviceModal';
-import useToken from "../app/useToken";
+import useToken from "../../states/useToken";
 import { useNavigate } from "react-router-dom";
 
-const DeviceItem = ({ id, name, power, consumptionKWh, consumptionReais, handleClick, handleDelete,}) => {
+const DeviceItem = ({ id, addressId, name, power, consumptionKWh, consumptionReais, handleClick, handleDelete,}) => {
   const { token, payload } = useToken();
   const navigate = useNavigate();
 
+  console.log(addressId);
   const handleEdit = () => {
-    navigate(`/devices/alterar/${id}` );
+    navigate(`/devices/alterar/${id}/${addressId}`);
   };
 
   return (
@@ -29,7 +30,7 @@ const DeviceItem = ({ id, name, power, consumptionKWh, consumptionReais, handleC
           onClick={ handleEdit }>
           <GearSix  size={25} weight="fill" />
         </button>
-        <DeleteDeviceModal token={token} id={id} addressId={payload.id} onDelete={handleDelete}/>
+        <DeleteDeviceModal token={token} id={id} addressId={addressId} onDelete={handleDelete}/>
       </div>
     </>
   );

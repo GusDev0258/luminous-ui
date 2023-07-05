@@ -51,7 +51,7 @@ export default function Router() {
         <Route path="/address/alterar/:id" element={<AddressEditar />} />
         <Route path="/devices" element={<Devices />} />
         <Route path="/devices/cadastro" element={<DeviceCadastro />} />
-        <Route path="/devices/alterar/:id" element={<DeviceEditar />} />
+        <Route path="/devices/alterar/:id/:addressId" element={<DeviceEditar />} />
 
       </Routes>
       </CurrentAddressProvider>
