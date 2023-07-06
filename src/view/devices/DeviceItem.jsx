@@ -8,7 +8,6 @@ const DeviceItem = ({ id, addressId, name, power, consumptionKWh, consumptionRea
   const { token, payload } = useToken();
   const navigate = useNavigate();
 
-  console.log(addressId);
   const handleEdit = () => {
     navigate(`/devices/alterar/${id}/${addressId}`);
   };

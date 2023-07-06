@@ -18,7 +18,7 @@ export default function Devices() {
       const { currentAddress } = useContext(
         CurrentAddressContext
       );
-      console.log(currentAddress);
+      console.log(currentAddress[0].id);
 
       const removeDevice = (id) => {
         setDevices((device) => {
@@ -26,11 +26,9 @@ export default function Devices() {
         })
       }
 
-
     if (!devices) {
         (async () => {
-          const data = await getDevicesOfAddress(token, currentAddress.id);
-          console.log(currentAddress.id);
+          const data = await getDevicesOfAddress(token, currentAddress[0]["id"]);
           setDevices(data);
         })();
         return <Loading />;
@@ -43,7 +41,7 @@ export default function Devices() {
 
                     <DeviceItem
                     id={device.id}
-                    addressId={currentAddress.id}
+                    addressId={currentAddress[0]["id"]}
                     name={device.name}
                     power={device.power}
                     consumptionKWh={device.consumptionKWh.toFixed(2)}
