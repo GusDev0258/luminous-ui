@@ -1,7 +1,7 @@
 import { BASE_URL } from "./DefaultUrl";
 
 export async function getDevicesOfAddress(token, id) {
-  const response = await fetch(`${BASE_URL}device/all/address/${"10"}`, {
+  const response = await fetch(`${BASE_URL}device/all/address/${id}`, {
     method: "GET",
     headers: {
       Accept: "application/json",

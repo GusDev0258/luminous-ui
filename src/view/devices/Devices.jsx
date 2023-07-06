@@ -18,7 +18,6 @@ export default function Devices() {
       const { currentAddress } = useContext(
         CurrentAddressContext
       );
-      console.log(currentAddress[0].id);
 
       const removeDevice = (id) => {
         setDevices((device) => {
