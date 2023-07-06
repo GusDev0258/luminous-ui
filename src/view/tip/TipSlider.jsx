@@ -5,7 +5,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import {BASE_URL} from '../../api/DefaultUrl';
 import TipCard from './TipCard';
-import useToken from '../app/useToken';
+import useToken from '../../states/useToken';
 import TipImage from '../../images/tipImage.png';
 import {LightbulbFilament} from 'phosphor-react';
 import '../../css/Tip/TipCard.css';

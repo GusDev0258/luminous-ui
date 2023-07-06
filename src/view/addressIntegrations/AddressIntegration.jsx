@@ -4,7 +4,7 @@ import Integration from './Integration';
 import '../../css/Integration/integration.css';
 import axios from 'axios';
 import {getAddressById} from '../../api/FetchAddress';
-import useToken from '../app/useToken';
+import useToken from '../../states/useToken';
 import { CurrentAddressContext } from '../../states/CurrentAddressContext';
 
 const AddressIntegration = () => {
