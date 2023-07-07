@@ -1,8 +1,8 @@
 import { BASE_URL } from "./DefaultUrl";
 
-export async function getAddressByUser(token, { id }) {
+export async function createAddressByUser(token, { id }) {
   const response = await fetch(`${BASE_URL}address/user/${id}`, {
-    method: "GET",
+    method: "POST",
     headers: {
       Accept: "application/json",
       Authorization: `Bearer ${token}`,
@@ -12,8 +12,8 @@ export async function getAddressByUser(token, { id }) {
   return response;
 }
 
-export async function getAddressById(token, addressId){
-  const response = await fetch(`${BASE_URL}address/${addressId}`, {
+export async function getAddressByUser(token, addressId){
+  const response = await fetch(`${BASE_URL}address/user/${addressId}`, {
     method: "GET",
     headers: {
       Accept: "application/json",
@@ -67,6 +67,7 @@ export async function updateAddressById(token, userId, addressId, addressData) {
 }
 
 export async function getReportAddressById(token, addressId) {
+  
   try {
     const response = await fetch(`${BASE_URL}report/address/${addressId}`, {
       method: "GET",

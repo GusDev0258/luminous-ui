@@ -1,0 +1,25 @@
+.flexFlag{
+    margin-top: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.typography-tf{
+    margin-top: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    display: flex;
+    height: 92px;
+    flex-direction: column;
+    flex-shrink: 0;
+    color: #727272;
+    text-align: center;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+}

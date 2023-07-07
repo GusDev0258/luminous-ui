@@ -2,9 +2,10 @@ import React from 'react'
 import Header from '../utils/Header';
 import Integration from './Integration';
 import '../../css/Integration/integration.css';
+import {getAddressByUser} from '../../api/FetchAddress';
 import axios from 'axios';
 import {getAddressById} from '../../api/FetchAddress';
-import useToken from '../app/useToken';
+import useToken from "../../states/useToken";
 import { CurrentAddressContext } from '../../states/CurrentAddressContext';
 
 const AddressIntegration = () => {
@@ -18,7 +19,7 @@ const AddressIntegration = () => {
   React.useEffect(() =>{
     document.title = "Integrações | Luminous";
     const getAddress = async (token, addressId) =>{
-      const response = await getAddressById(token, addressId);
+      const response = await getAddressByUser(token, addressId);
       await setCurrentAddress(response);
     }
     getAddress(token, addressId);
@@ -47,9 +48,11 @@ const AddressIntegration = () => {
         <ul className="integration-list">
           <Integration url={`/energyBill/`} text="Faturas"/>
           <Integration url={`/consumption-alert/`} text="Alertas de consumo"/>
-          <Integration url={`/devices/`} text="Equipamentos"/>
+          <Integration url={`/devices/?address=${addressId}`} text="Equipamentos"/>
+          <Integration url={`/consumptionTrack/address/${addressId}`} text="ACOMPANHAR CONSUMO"/>
           <Integration url={urlMaintenance} text="Consultar Manutenção na Rede Elétrica"/>
           <Integration url={urlEnergyFall} text="Consultar Falta de Energia"/>
+          <Integration url={`/report/address/${addressId}`} text="Relatórios"/>
         </ul>
       </section>
     </>
