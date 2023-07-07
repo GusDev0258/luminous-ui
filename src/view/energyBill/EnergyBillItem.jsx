@@ -35,17 +35,12 @@ const EnergyBillItem = ({
       },
     })
       .then((response) => {
-        // Cria um URL temporário para o arquivo baixado
         const url = window.URL.createObjectURL(new Blob([response.data]));
-
-        // Cria um elemento de link para iniciar o download
         const link = document.createElement('a');
         link.href = url;
         link.setAttribute('download', `minha_fatura_${moment(dueDate).format("DD/MM/YYYY")}.pdf`);
         document.body.appendChild(link);
         link.click();
-
-        // Remove o elemento de link e libera o URL temporário
         link.parentNode.removeChild(link);
         window.URL.revokeObjectURL(url);
       })
