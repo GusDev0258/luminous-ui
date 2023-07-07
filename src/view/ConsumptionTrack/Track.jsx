@@ -4,7 +4,6 @@ import { Fragment, useState, useContext } from "react";
 import { getCurrentConsumption } from "../../api/FetchConsumptionTrack";
 import Header from "../utils/Header";
 import useToken from "../../states/useToken";
-import { useNavigate } from "react-router-dom";
 import Loading from "../loading/Loading";
 import { CurrentAddressContext } from "../../states/CurrentAddressContext";
 import TrackBar from "./TrackBar";

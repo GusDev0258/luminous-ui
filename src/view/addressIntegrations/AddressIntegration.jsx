@@ -3,6 +3,8 @@ import Header from '../utils/Header';
 import Integration from './Integration';
 import '../../css/Integration/integration.css';
 import {getAddressByUser} from '../../api/FetchAddress';
+import axios from 'axios';
+import {getAddressById} from '../../api/FetchAddress';
 import useToken from "../../states/useToken";
 import { CurrentAddressContext } from '../../states/CurrentAddressContext';
 
@@ -50,6 +52,7 @@ const AddressIntegration = () => {
           <Integration url={`/consumptionTrack/address/${addressId}`} text="ACOMPANHAR CONSUMO"/>
           <Integration url={urlMaintenance} text="Consultar Manutenção na Rede Elétrica"/>
           <Integration url={urlEnergyFall} text="Consultar Falta de Energia"/>
+          <Integration url={`/report/address/${addressId}`} text="Relatórios"/>
         </ul>
       </section>
     </>

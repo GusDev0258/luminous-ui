@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Header from "../utils/Header";
 import { Chart } from "react-google-charts";
-import DefaultSelection from "../utils/Form/DefaultSelection";
+import Select from 'react-select';
 import { useParams, useNavigate } from "react-router-dom";
 import useToken from "../../states/useToken";
 import { getReportAddressById } from "../../api/FetchAddress";
 
 const AddressConsumptionReport = () => {
-  //const { id } = useParams();
-  const id = 10;
+  const { id } = useParams();
   const { token } = useToken();
   const navigate = useNavigate();
   const [report, setReport] = useState([]);
@@ -17,7 +16,6 @@ const AddressConsumptionReport = () => {
     const fetchAddress = async () => {
       try {
         const report = await getReportAddressById(token, id);
-        
         setReport(report);
       } catch (error) {
         console.error("Error fetching address:", error);
@@ -75,16 +73,38 @@ const AddressConsumptionReport = () => {
   return (
     <div>
       <Header textContent="Relatório de Consumo" />
-      <div>
-        <DefaultSelection
-          label="Filtrar por:"
-          value={filter}
-          setValue={setFilter}
-          options={["KWH", "CRs"]}
+      <div className="default-form-input">
+        <label htmlFor="filter" className="default-input-label">
+          Filtrar por:
+        </label>
+        <Select
+          id="filter"
+          value={{ value: filter, label: filter }}
+          onChange={selectedOption => setFilter(selectedOption.value)}
+          classNamePrefix="custom-select"
+          className="custom-select-control"
+          placeholderClassName="custom-select-placeholder"
+          isSearchable={false}
+          options={["KWH", "CRs"].map(option => ({
+            value: option,
+            label: option
+          }))}
+          theme={theme => ({
+            ...theme,
+            colors: {
+              ...theme.colors,
+              primary: "#ca8a04", // Cor da borda
+              primary25: "#f5f5f5" // Cor de fundo das opções ao passar o mouse
+            }
+          })}
         />
       </div>
 
-      <Chart chartType="Bar" width="100%" height="400px" data={generateChartData()} options={options} />
+      {generateChartData().length > 1 ? (
+        <Chart chartType="Bar" width="100%" height="400px" data={generateChartData()} options={options} />
+      ) : (
+        <p className="default-input-label">Não há consumo cadastrado para esse endereço</p>
+      )}
     </div>
   );
 };
