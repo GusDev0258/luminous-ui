@@ -5,7 +5,7 @@ import '../../css/Integration/integration.css';
 import {getAddressByUser} from '../../api/FetchAddress';
 import useToken from "../../states/useToken";
 import { CurrentAddressContext } from '../../states/CurrentAddressContext';
-import { fetchConsumptionTrack } from "../../api/FetchConsumptionTrack";
+import { getCurrentConsumption } from "../../api/FetchConsumptionTrack";
 
 const AddressIntegration = () => {
   const params = new Proxy(new URLSearchParams(window.location.search), {
@@ -26,7 +26,7 @@ const AddressIntegration = () => {
     getAddress(token, addressId);
 
     const getConsumptionTrack = async (token, addressId) => {
-      const response = await fetchConsumptionTrack(token, addressId);
+      const response = await getCurrentConsumption(token, addressId);
     };
     if (currentAddress !== null) {
       try {
