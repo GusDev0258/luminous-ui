@@ -4,7 +4,7 @@ import Integration from './Integration';
 import '../../css/Integration/integration.css';
 import axios from 'axios';
 import {getAddressById} from '../../api/FetchAddress';
-import useToken from '../app/useToken';
+import useToken from "../../states/useToken";
 import { CurrentAddressContext } from '../../states/CurrentAddressContext';
 
 const AddressIntegration = () => {
@@ -50,6 +50,7 @@ const AddressIntegration = () => {
           <Integration url={`/devices/`} text="Equipamentos"/>
           <Integration url={urlMaintenance} text="Consultar Manutenção na Rede Elétrica"/>
           <Integration url={urlEnergyFall} text="Consultar Falta de Energia"/>
+          <Integration url={`/report/address/${addressId}`} text="Relatórios"/>
         </ul>
       </section>
     </>

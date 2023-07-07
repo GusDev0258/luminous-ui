@@ -4,7 +4,7 @@ import Header from "../utils/Header";
 import DefaultInput from "../utils/Form/DefaultInput";
 import DefaultCheckbox from "../utils/Form/DefaultCheckbox";
 import { useParams, useNavigate } from "react-router-dom";
-import useToken from "../app/useToken";
+import useToken from "../../states/useToken";
 import { updateAddressById, getAddressByUser } from "../../api/FetchAddress";
 
 const AddressEditar = () => {

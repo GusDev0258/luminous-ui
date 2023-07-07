@@ -1,7 +1,7 @@
 import { GearSix } from 'phosphor-react';
 import React from 'react';
 import DeleteAddressModal from './DeleteAddressModal';
-import useToken from "../app/useToken";
+import useToken from "../../states/useToken";
 import { useNavigate } from "react-router-dom";
 
 const AddressItem = ({ id, city, houseNumber, inputVoltage, neighborhood, street, state, handleClick, handleDelete, ...props }) => {

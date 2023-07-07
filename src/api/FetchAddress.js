@@ -67,6 +67,7 @@ export async function updateAddressById(token, userId, addressId, addressData) {
 }
 
 export async function getReportAddressById(token, addressId) {
+  
   try {
     const response = await fetch(`${BASE_URL}report/address/${addressId}`, {
       method: "GET",

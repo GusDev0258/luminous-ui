@@ -7,7 +7,7 @@ import errorImage from "../../images/noRegistersImage.svg";
 import EnergyBillItem from "./EnergyBillItem";
 import energyBillImageDeco from "../../images/decoEnergyBill.svg";
 import axios from "axios";
-import useToken from "../app/useToken";
+import useToken from "../../states/useToken";
 import { CurrentAddressContext } from "../../states/CurrentAddressContext";
 import { fetchAllEnergyBills } from "../../api/FetchEnergyBills";
 
