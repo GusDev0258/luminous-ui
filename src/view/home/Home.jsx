@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import { getAddressByUser } from "../../api/FetchAddress";
+import { getAddressById } from "../../api/FetchAddress";
 import useToken from "../../states/useToken";
 import { useNavigate } from "react-router-dom";
 import { PlusCircle } from "@phosphor-icons/react";
@@ -15,7 +15,8 @@ export default function Home() {
   useEffect(() => {
     document.title = "Minhas Residências | Luminous";
     async function requestAddresses() {
-      const response = await getAddressByUser(token, payload);
+      console.log(payload);
+      const response = await getAddressById(token, payload);
       return response;
     }
     requestAddresses().then((data) => {

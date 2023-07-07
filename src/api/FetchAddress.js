@@ -12,8 +12,8 @@ export async function createAddressByUser(token, { id }) {
   return response;
 }
 
-export async function getAddressByUser(token, addressId){
-  const response = await fetch(`${BASE_URL}address/user/${addressId}`, {
+export async function getAddressById(token, addressId){
+  const response = await fetch(`${BASE_URL}address/${addressId}`, {
     method: "GET",
     headers: {
       Accept: "application/json",
