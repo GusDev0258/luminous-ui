@@ -1,7 +1,13 @@
-.last-month-kwh {
-    position: center;
+.flex-track{
+    margin-top: 25px;
     display: flex;
-    top: 306px;
+    align-items: center;
+    justify-content: center;
+}
+#last-month-kwh {
+    position: relative;
+    display: flex;
+    top: 1 px;
     width: 300px;
     height: 16px;
     border-radius: 9px;
@@ -9,24 +15,28 @@
     box-shadow: 1px -1px 7px 0px rgba(255, 199, 0, 0.08) inset;
 }
 
-.current-month-kwh {
-    position: center;
+#current-month-kwh {
+    margin-right: 12px;
+    width: 0px;
+    font-family: Poppins;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 14px;
     display: flex;
-    top: 306px;
-    width: 178px;
+    align-items: center;
+    justify-content: right;
     height: 17px;
     border-radius: 9px;
     background: #FCCC23;
     box-shadow: 9px 0px 9px -4px rgba(0, 0, 0, 0.40);
+    transition: width 0.5s;
 }
 
 .total-value{
     margin: auto;
-    display: flex;
     width: 240px;
     height: 92px;
-    flex-direction: column;
-    justify-content: center;
     flex-shrink: 0;
     color: #404040;
     text-align: center;
@@ -39,7 +49,7 @@
 
 .typography{
     color: #404040;
-    text-align: left;
+    text-align: center;
     font-family: Poppins;
     font-size: 11px;
     font-style: normal;
@@ -48,8 +58,24 @@
 }
 
 .typography-16{
+    margin-top: 50px;
     color: #404040;
     text-align: left;
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 14px;
+}
+
+.typography-17{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 123px;
+    color: #404040;
+    text-align: left;
+    justify-self: center;
     font-family: Poppins;
     font-size: 16px;
     font-style: normal;
@@ -67,6 +93,9 @@
 }
 
 .circle{
+    margin-top: 10px;
+    display: grid;
+    place-items: center;
     width: 278px;
     height: 278px;
     flex-shrink: 0;

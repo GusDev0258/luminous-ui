@@ -48,7 +48,6 @@ const AddressIntegration = () => {
           <Integration url={`/consumption-alert/`} text="Alertas de consumo"/>
           <Integration url={`/devices/?address=${addressId}`} text="Equipamentos"/>
           <Integration url={`/consumptionTrack/address/${addressId}`} text="ACOMPANHAR CONSUMO"/>
-          <Integration url={`/devices/`} text="Equipamentos"/>
           <Integration url={urlMaintenance} text="Consultar Manutenção na Rede Elétrica"/>
           <Integration url={urlEnergyFall} text="Consultar Falta de Energia"/>
         </ul>

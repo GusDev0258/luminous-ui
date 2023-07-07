@@ -4,9 +4,11 @@ import {Link} from 'react-router-dom';
 
 const Integration = ({url, text}) => {
   return (
-    <li className="integration-card">
-      <Link to={url} >{text}</Link>
-    </li>
+    <div className='integration-container'>
+      <li className="integration-card">
+        <Link to={url} >{text}</Link>
+      </li>
+    </div>
   )
 }
 

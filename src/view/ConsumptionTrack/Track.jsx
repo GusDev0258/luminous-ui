@@ -7,6 +7,7 @@ import useToken from "../../states/useToken";
 import { useNavigate } from "react-router-dom";
 import Loading from "../loading/Loading";
 import { CurrentAddressContext } from "../../states/CurrentAddressContext";
+import TrackBar from "./TrackBar";
 
 const ConsumptionTrack = () => {
     
@@ -29,21 +30,26 @@ const ConsumptionTrack = () => {
         } else {
 
             const{energyConsumptionKWh, energyConsumptionReais, lastEnergyBill} = consumption
-            const currentCons = consumption.energyConsumptionKWh;
             const lastMonthCons = 108.43;
             const tributes = 37.56;
+
+            const getBarWidth = () =>{
+                let element  = document.getElementById("current-month-kwh");
+                let largura = (300*energyConsumptionKWh)/lastMonthCons
+                element.style.width = largura + "%";
+            }
+
         return(
             <Fragment>
             <div>
                 <Header textContent={"Acompanhamento"} />
-                <div>
-                    <p class="typography">{lastMonthCons} kWh</p>
-                    <div class="last-month-kwh"></div>
-                    <p class="typography">{energyConsumptionKWh.toFixed(2)} kWh</p>  
-                    <div class="current-month-kwh"></div>
+                <TrackBar lastConsumption={lastMonthCons} currentConsumption={energyConsumptionKWh}/>
+                
+                <div className="typography-17">
+                    Tributos totais: {tributes}
                 </div>
-                    <p class="typography">Tributos totais: R${tributes}</p>
-                <div>
+
+                <div className="flex-track">
                     <div class = "circle">
                         <p class="typography-16">Valor total:</p>
                         <p class="total-value">R${(energyConsumptionReais + tributes).toFixed(2)}</p>
