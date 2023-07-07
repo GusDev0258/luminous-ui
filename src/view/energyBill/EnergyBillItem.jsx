@@ -4,6 +4,8 @@ import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import useToken from "../../states/useToken";
 import { deleteEnergyBillById } from "../../api/FetchEnergyBills";
+import axios from "axios";
+import { BASE_URL } from "../../api/DefaultUrl";
 
 const EnergyBillItem = ({
   id,
@@ -25,14 +27,43 @@ const EnergyBillItem = ({
     }).catch((error) => console.log(error)); 
   }
 
+  const handleDownload = (energyBillId, dueDate) => {
+    axios.get(`${BASE_URL}billFile/download/${energyBillId}`,{
+      responseType: 'blob',
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        // Cria um URL temporário para o arquivo baixado
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+
+        // Cria um elemento de link para iniciar o download
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `minha_fatura_${moment(dueDate).format("DD/MM/YYYY")}.pdf`);
+        document.body.appendChild(link);
+        link.click();
+
+        // Remove o elemento de link e libera o URL temporário
+        link.parentNode.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      })
+      .catch((error) => {
+        console.error('Erro ao baixar o arquivo:', error);
+      });
+  };
+
   return (
     <>
       <li className="default-item" id={id}>
         <span className="default-item-title-text">{address}</span>
         <div className="default-item-with-icons-container">
+        <a onClick={() => handleDownload(id, dueDate)}>
         <span className="default-item-main-text">
           Fatura - {moment(dueDate).format("DD/MM/YYYY")}
         </span>
+        </a>
         <PencilSimple size={24} className="default-item-edit" onClick={handleEdit}/>
         <Trash size={24} className="default-item-delete" onClick={handleDelete}/>
         </div>
