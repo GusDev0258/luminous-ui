@@ -1,21 +1,21 @@
-import React from 'react'
-import useToken from './useToken';
-import Login from '../login/Login';
-import Home from '../home/Home';
+import Router from "../../routes/Router";
+import { Link } from "react-router-dom";
 
 function App() {
-  const {token } = useToken();
-
-  if(!token) {
-    return <Login/>
-  }
-
-    return(
-      <div>
-        <Home/>
-      </div>
-    )
-
+  return (
+    <div>
+      <Link to="/white-taxes">
+        <button>white-taxes</button>
+      </Link>
+      <Link to="/">
+        <button>home</button>
+      </Link>
+      <Link to="/profile">
+        <button>Profile</button>
+      </Link>
+      <Router />
+    </div>
+  );
 }
 
 export default App;

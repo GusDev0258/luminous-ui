@@ -1,40 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import {StrictMode} from 'react';
+import {createRoot } from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import App from './view/app/App';
-import Home from './view/home/Home';
-import Login from './view/login/Login';
-import CadUser from './view/cadUser/CadUser';
-import WhiteTax from './view/whiteTax/WhiteTax';
-import AuthVerify from './view/auth/AuthVerify';
+import { BrowserRouter } from 'react-router-dom';
 import SnackBar from './view/weather-notifaction/SnackBar';
-import CadAddress from './view/cadAddress/CadAddress';
-import { AddressContextProvider } from './states/AddressContext';
-import EnergyBill from './view/energyBill/EnergyBill';
-import EnergyBillCadastro from './view/energyBill/EnergyBillCadastro';
+import Modal from 'react-modal';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-
-  <BrowserRouter>
-    <AddressContextProvider>
-    <Routes>
-      <Route path="/login" element={<Login />}/>
-      <Route path="/register" element={<CadUser/>}/>
-      <Route path="/" element={<App />}/>
-      <Route path="/home" element={<Home />}/>
-      <Route path="/register-address" element={<CadAddress/>}/>
-      <Route path="/white-taxes" element={<WhiteTax/>}/>
-      <Route path="/energyBill/" element={<EnergyBill/>}/>
-      <Route path="/energyBill/cadastro/" element={<EnergyBillCadastro/>}/>
-    </Routes>
-    <AuthVerify/>
-    <SnackBar/>
-    </AddressContextProvider>
-  </BrowserRouter>
+createRoot(document.getElementById('root')).render(
+      <StrictMode>
+        <BrowserRouter>
+          <App/>
+        </BrowserRouter>
+      </StrictMode>
 );
+
+createRoot(document.getElementById('snackbar-root')).render(
+  <StrictMode>
+    <SnackBar/>
+  </StrictMode>
+);
+
+Modal.setAppElement("#root");
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

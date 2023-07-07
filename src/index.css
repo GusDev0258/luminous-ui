@@ -7,6 +7,7 @@
 @import "./css/Utils/Header.css";
 @import "./css/Utils/DefaultItem.css";
 @import './css/Home/Home.css';
+@import './css/Chart/Chart.css';
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",

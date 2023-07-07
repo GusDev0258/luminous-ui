@@ -5,7 +5,7 @@
   width: 100%;
   align-items: center;
   justify-content: center;
-  margin-top: 5rem;
+  margin-top: 1rem;
 }
 .form-container{
   display: flex;
@@ -27,7 +27,14 @@
 .default-info-message{
   font-weight: 500;
   padding: 8px;
+  text-decoration: none;
 }
 .default-info-message a{
   color: #713F12;
+}
+
+@media (min-width: 1087px) {
+  .control-label{
+    margin-bottom: 0px;
+  }
 }

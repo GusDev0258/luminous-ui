@@ -31,3 +31,13 @@ img[alt="Error"]{
 .image-container{
   margin-top: 12px;
 }
+
+@media (min-width: 1087px) {
+  .logo{
+    margin-top: 0rem;
+  }
+
+  img[alt="Error"]{
+    padding: 0.5rem;
+  }
+}

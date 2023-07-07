@@ -1,4 +1,4 @@
-.primary-button{
+.primary-button {
   padding: 8px 24px;
   font-size: 1.5rem;
   text-transform: uppercase;
@@ -16,23 +16,108 @@
   justify-content: center;
   gap: 8px;
 }
-.primary-button:hover{
+
+.primary-button:hover {
   background-color: #464646;
 }
-.icon-button{
+
+.primary-button.continue{
+  max-width: 40vw;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.icon-button {
   background-color: transparent;
   border: none;
   padding: 4px;
 }
-.btn-cadastrar{
+
+.btn-cadastrar {
   font-size: 1.2rem;
 }
-.btn-container{
+
+.btn-container {
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
   margin-bottom: 40px;
 }
-.btn-fatura{
+
+.btn-fatura {
   width: 100%;
+}
+
+.btn-delete-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.btn-delete {
+  margin-top: 1rem;
+  width: 182px;
+  height: 48px;
+  left: 104px;
+  top: 686px;
+  background: #DC2626;
+  color: #FAFAFA;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-transform: uppercase;
+  border: 0;
+  border-radius: 4px;
+}
+
+.btns-address{
+  margin-left: auto;
+  display: flex;
+  gap: 15px;
+  margin-top: 12px;
+}
+
+.btn-address-delete{
+  width: 50px;
+  background: #DC2626;
+  color: #FAFAFA;
+  border-radius: 8px;
+  border: 0;
+}
+
+.btn-address-edit{
+  width: 50px;
+  background: #84CC16;
+  color: #FAFAFA;
+  border-radius: 8px;
+  border: 0;
+}
+
+.btns-address-modal{
+  margin-left: auto;
+  display: flex;
+  gap: 15px;
+  margin-top: 12px;
+}
+
+.btn-address-modal-delete{
+  width: 80px;
+  height: 35px;
+  background: #DC2626;
+  color: #FAFAFA;
+  border-radius: 8px;
+  border: 0;
+}
+
+.btn-address-modal-cancelar{
+  width: 80px;
+  height: 35px;
+  background: #7d8374;
+  color: #FAFAFA;
+  border-radius: 8px;
+  border: 0;
 }

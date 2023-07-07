@@ -1,17 +1,22 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginUser } from "../../api/FetchUser";
 import * as yup from "yup";
-import useToken from "../app/useToken";
+import useToken from "../../states/useToken";
 import logo from "../../images/luminous-logo.svg";
 import abstractVector from "../../images/login-abstract.svg";
+
 
 export default function Login() {
   const [unauthorized, setUnauthorized] = useState(false);
   const { setToken } = useToken();
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    document.title = "Login | Luminous";
+  }, []);
 
   const schema = yup
     .object()
@@ -32,7 +37,7 @@ export default function Login() {
     resolver: yupResolver(schema),
   });
 
-  const redirectToHome = () => navigate("/home");
+  const redirectToHome = () => navigate("/login/tip");
 
   const login = async (userData) => {
     const data = await loginUser(userData);
@@ -42,6 +47,7 @@ export default function Login() {
     } else {
       setUnauthorized(true);
     }
+
   }
     return (
       <div className="default-form-container">
@@ -77,6 +83,9 @@ export default function Login() {
         <p className="default-info-message">
           Não possue uma conta? <a href="/register">Registre-se</a>
         </p>
+        <Link className="default-info-message" to={"/password/recover"}>
+          Esqueceu sua senha?
+        </Link>
         <img src={abstractVector} alt="deco" />
       </div>
     );

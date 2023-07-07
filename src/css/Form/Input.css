@@ -1,7 +1,7 @@
 .default-form-input {
-  width: 72vw;
-  height: 1vh;
-  padding: 1rem;
+  width: 75vw;
+  height: auto;
+  padding: 0.5rem;
   border: 1px solid #ca8a04;
   background-color: #f5f5f5;
   color: #404040;
@@ -38,6 +38,87 @@
   font-family: 'Poppins', Georgia, 'Times New Roman', Times, serif;
   width: 80vw;
 }
-.default-input-file{
-  
+
+@media (min-width: 651) and (max-width: 1087px){
+  .default-form-input {
+    width: 10vw;
+  }
+}
+
+@media (min-width: 1087px) {
+  .default-form-input {
+    width: 30vw;
+  }
+}
+
+.default-input-label {
+  margin-bottom: 4px;
+  font-size: 1.1rem;
+  font-family: 'Poppins', Georgia, 'Times New Roman', Times, serif;
+  width: 80vw;
+}
+
+.custom-checkbox-label {
+  /* Estilos para a label do checkbox */
+  font-size: 1.1rem;
+  font-family: 'Poppins', Georgia, 'Times New Roman', Times, serif;
+  width: 80vw;
+  color: #404040;
+}
+
+.custom-checkbox-input {
+  /* Estilos para o input do checkbox */
+  width: 20px; /* Ajuste o tamanho conforme necessário */
+  height: 20px; /* Ajuste o tamanho conforme necessário */
+  margin-right: 8px;
+  background-color: #f5f5f5;
+  border: 1px solid #ca8a04;
+}
+
+.custom-checkbox-input:checked + .custom-checkbox-label::before {
+  background-color: #ca8a04 !important;
+}
+
+
+.custom-select-control {
+  /* Estilos para o controle do Select */
+  width: 100%;
+  border-color: #ca8a04;
+}
+
+.custom-select-control:hover {
+  /* Estilos ao passar o mouse sobre o controle do Select */
+  border-color: #ca8a04;
+}
+
+.custom-select-control:focus {
+  /* Estilos quando o controle do Select está em foco */
+  box-shadow: 0 0 0 1px #ca8a04;
+}
+
+.custom-select-placeholder {
+  /* Estilos para o texto de placeholder do Select */
+  color: #40404058;
+}
+
+.custom-select-single-value {
+  /* Estilos para o texto do valor selecionado do Select */
+  color: #404040;
+}
+
+.custom-select-option {
+  /* Estilos para as opções do Select */
+  color: #40404058;
+}
+
+.custom-select-option:hover {
+  /* Estilos ao passar o mouse sobre as opções do Select */
+  background-color: #f5f5f5;
+  color: #404040;
+}
+
+.custom-select-option--is-selected {
+  /* Estilos para a opção selecionada do Select */
+  background-color: #f5f5f5;
+  color: #404040;
 }

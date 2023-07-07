@@ -1,51 +1,44 @@
-import useToken from "../app/useToken";
-import { AddressContext } from "../../states/AddressContext";
-import { useLocation } from "react-router-dom";
-import { Fragment, useContext, useEffect, useState } from "react";
+import React, { useState, useEffect, Fragment } from "react";
+import useToken from "../../states/useToken";
 import { getWeatherTips } from "../../api/FetchWeatherTip";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Notification from "./Notification";
 
-function notInRegisterAndLogin(location) {
-  return location.pathname !== "/register" && location.pathname !== "/login";
-}
+const FIVE_MINUTES = 5 * 60 * 1000;
 
-function isInHome(location) {
-  return location.pathname === "/home";
-}
-
-export default function SnackBar() {
-  const location = useLocation();
-  const { token, payload } = useToken();
-  const [visible, setVisible] = useState(true);
+const SnackBar = () => {
   const [notification, setNotification] = useState({});
-  const { hasAddress } = useContext(AddressContext);
-  const FIVE_MINUTES = 5 * 60 * 1000;
+  const { token, payload } = useToken();
+
+  const fetchNotifications = async () => {
+    try {
+      const data = await getWeatherTips(token, payload);
+      setNotification(data);
+      notify(data);
+    } catch (error) {}
+  };
 
   useEffect(() => {
-    (async () => {
-      if (notInRegisterAndLogin(location) || isInHome(location)) {
-        if (Object.keys(notification).length === 0 && payload) {
-          setNotification(await getWeatherTips(token, payload));
-          const timer = setInterval(() => setVisible(true), FIVE_MINUTES);
-          return () => clearInterval(timer);
-        }
-      }
-    })();
-  }, [hasAddress]);
+    if (
+      window.location.pathname !== "/register" &&
+      window.location.pathname !== "/login"
+    ) {
+      const interval = setInterval(fetchNotifications, FIVE_MINUTES);
+
+      return () => {
+        clearInterval(interval);
+      };
+    }
+  }, [notification]);
+
+  const notify = (data) => toast(<Notification notification={data} />);
 
   return (
     <Fragment>
-      {visible && Object.keys(notification).length !== 0 ? (
-        <div>
-          <div>{notification.city}</div>
-          <div>{notification.description}</div>
-          <div>{notification.feelsLike}</div>
-          <div>{notification.temperature}</div>
-          <div>{notification.tip}</div>
-          <button onClick={() => setVisible(false)}>X</button>
-        </div>
-      ) : (
-        <Fragment></Fragment>
-      )}
+      <ToastContainer />
     </Fragment>
   );
-}
+};
+
+export default SnackBar;
