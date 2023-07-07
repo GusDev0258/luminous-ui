@@ -23,6 +23,22 @@ const AddressIntegration = () => {
     }
     getAddress(token, addressId);
   },[addressId]);
+
+  const getIntegrationUrls = () => {
+    if (currentAddress && currentAddress.energyProvider) {
+      const { energyProvider } = currentAddress;
+      return {
+        urlMaintenance: energyProvider.urlMaintenance,
+        urlEnergyFall: energyProvider.urlEnergyFall,
+      };
+    }
+    return {
+      urlMaintenance: '',
+      urlEnergyFall: '',
+    };
+  };
+
+  const { urlMaintenance, urlEnergyFall } = getIntegrationUrls();
   
   return (
     <>
@@ -32,6 +48,8 @@ const AddressIntegration = () => {
           <Integration url={`/energyBill/`} text="Faturas"/>
           <Integration url={`/consumption-alert/`} text="Alertas de consumo"/>
           <Integration url={`/devices/`} text="Equipamentos"/>
+          <Integration url={urlMaintenance} text="Consultar Manutenção na Rede Elétrica"/>
+          <Integration url={urlEnergyFall} text="Consultar Falta de Energia"/>
         </ul>
       </section>
     </>
