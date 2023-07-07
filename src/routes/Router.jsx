@@ -41,7 +41,7 @@ export default function Router() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/home" element={<Home />} />
         <Route path="/tariff-flag" element={<TariffFlag />} />
-        <Route path="/integracoes/" element={<AddressIntegration/>}/>
+        <Route path="/integracoes/:addressId" element={<AddressIntegration/>}/>
         <Route path="/energyBill/" element={<EnergyBill/>}/>
         <Route path="/energyBill/cadastro/" element={<EnergyBillCadastro/>}/>
         <Route path="/consumption-alert/" element={<ConsumptionAlert/>}/>
