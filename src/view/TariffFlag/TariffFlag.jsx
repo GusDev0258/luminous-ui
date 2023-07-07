@@ -9,10 +9,16 @@ export default function TariffFlag () {
     const [flag, setFlag] = useState();
     const { token } = useToken();
 
-    const flagColor = (flag) =>{
-      return flag == 1? "#CA8A04" :
-             flag == 2? "#22C55E" :
-             flag == 3? "#22C55E" : "#22C55E"
+    const flagColor = () =>{
+      return flag.flagType == 1? "#CA8A04" :
+             flag.flagType == 2? "#FF5E5E" :
+             flag.flagType == 3? "#BF0000" : "#22C55E";
+    }
+
+    const flagName= () =>{
+      return flag.flagType == 1? "Amarela" :
+             flag.flagType == 2? "Vermelha nivel 1" :
+             flag.flagType == 3? "Vermelha nivel 2" : "verde";
     }
 
     if (!flag) {
@@ -27,11 +33,13 @@ export default function TariffFlag () {
               <div>
               <Header textContent={"Bandeira tarifária"} />
               </div>
-                  
-              <div>
-                <p>Month {flag.month}</p>
-                <p>Flag Type {flag.flagType}</p>
-                <Flag size={78} color="#A3E635" />
+                
+              <div class="flexFlag"> 
+              <Flag size={90} color={flagColor()} /> 
+              </div>
+              <div class="typography-tf">
+                <p>Estamos na bandeira</p>
+                <p>{flagName()}!</p>
               </div>
 
             </Fragment>
