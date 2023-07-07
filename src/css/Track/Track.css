@@ -1,5 +1,6 @@
 .last-month-kwh {
     position: center;
+    display: flex;
     top: 306px;
     width: 300px;
     height: 16px;
@@ -10,6 +11,7 @@
 
 .current-month-kwh {
     position: center;
+    display: flex;
     top: 306px;
     width: 178px;
     height: 17px;

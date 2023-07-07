@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
+import Select from 'react-select';
 import Header from "../utils/Header";
 import DefaultInput from "../utils/Form/DefaultInput";
 import DefaultCheckbox from "../utils/Form/DefaultCheckbox";
-import DefaultSelection from "../utils/Form/DefaultSelection";
 import { useParams, useNavigate } from "react-router-dom";
 import useToken from "../../states/useToken";
 import { updateAddressById, getAddressByUser } from "../../api/FetchAddress";
-
-import { BASE_URL } from "../../api/DefaultUrl";
 
 const AddressEditar = () => {
   const { id } = useParams();
@@ -18,13 +16,15 @@ const AddressEditar = () => {
   const [cep, setCep] = useState("");
   const [houseNumber, setHouseNumber] = useState("");
   const [inputVoltage, setInputVoltage] = useState("");
+  const [inputProvider, setInputProvider] = useState("CELESC");
   const [street, setStreet] = useState("");
   const [neighborhood, setNeighborhood] = useState("");
   const [state, setState] = useState("");
   const [nickname, setNickname] = useState("");
   const [mainAddress, setMainAddress] = useState("");
 
-  const options = [110, 220];
+  const optVoltage = [110, 220];
+  const optProvider = ["CELESC"];
 
   useEffect(() => {
     const fetchAddress = async () => {
@@ -138,25 +138,75 @@ const AddressEditar = () => {
           setValue={setNickname}
         /> 
 
-        <div>
-          <DefaultSelection
-            label={"Voltagem"}
-            labelClassName={"default-input-label"}
-            className="inputVoltage-input default-form-input"
-            id="selectionId"
-            value={inputVoltage}
-            setValue={setInputVoltage}
-            options={options}
-          />  
-        </div>
+<div className="default-form-input">
+            <label htmlFor="inputVoltage" className="default-input-label">
+              Voltagem
+            </label>
+            <Select
+              id="inputVoltage"
+              value={{ value: inputVoltage, label: inputVoltage }}
+              onChange={selectedOption =>
+                setInputVoltage(selectedOption.value)
+              }
+              classNamePrefix="custom-select"
+              className="custom-select-control"
+              placeholderClassName="custom-select-placeholder"
+              isSearchable={false}
+              options={optVoltage.map(option => ({
+                value: option,
+                label: option
+              }))}
+              theme={theme => ({
+                ...theme,
+                colors: {
+                  ...theme.colors,
+                  primary: "#ca8a04", // Cor da borda
+                  primary25: "#f5f5f5" // Cor de fundo das opções ao passar o mouse
+                }
+              })}
+            />
+          </div>
 
-        <DefaultCheckbox 
-           label={"Endereço Principal"}
-           labelClassName={"default-input-label"}
-           id="mainAddress"
-           value={mainAddress}
-           onCheckedChange={setMainAddress}
-        />
+        <div className="default-form-input">
+            <label htmlFor="inputProvider" className="default-input-label">
+              Distribuidora
+            </label>
+            <Select
+              id="inputProvider"
+              value={{ value: inputProvider, label: inputProvider }}
+              onChange={selectedOption =>
+                setInputProvider(selectedOption.value)
+              }
+              classNamePrefix="custom-select"
+              className="custom-select-control"
+              placeholderClassName="custom-select-placeholder"
+              isSearchable={false}
+              options={optProvider.map(option => ({
+                value: option,
+                label: option
+              }))}
+              theme={theme => ({
+                ...theme,
+                colors: {
+                  ...theme.colors,
+                  primary: "#ca8a04", // Cor da borda
+                  primary25: "#f5f5f5" // Cor de fundo das opções ao passar o mouse
+                }
+              })}
+            />
+          </div>
+
+          <div className="default-form-input">
+            <label htmlFor="mainAddress" className="default-input-label custom-checkbox-label">
+              Endereço Principal
+            </label>
+            <DefaultCheckbox
+              id="mainAddress"
+              value={mainAddress}
+              onCheckedChange={setMainAddress}
+              className="custom-checkbox-input"
+            />
+          </div>
         
           <button type="submit" className="primary-button btn-endereco">
             Salvar

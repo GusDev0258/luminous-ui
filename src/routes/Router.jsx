@@ -25,6 +25,8 @@ import Devices from "../view/devices/Devices";
 import DeviceCadastro from "../view/devices/DeviceCadastro";
 import DeviceEditar from "../view/devices/DeviceEditar";
 import ConsumptionTrack from '../view/ConsumptionTrack/Track';
+import AddressConsumptionReport from "../view/Address/AddressConsumptionReport";
+
 
 export default function Router() {
   return (
@@ -54,7 +56,7 @@ export default function Router() {
         <Route path="/devices/cadastro" element={<DeviceCadastro />} />
         <Route path="/devices/alterar/:id/:addressId" element={<DeviceEditar />} />
         <Route path="/consumptionTrack/address/:addressId" element={<ConsumptionTrack />} />
-
+        <Route path="/report/address/:id" element={<AddressConsumptionReport />} />
       </Routes>
       </CurrentAddressProvider>
       <AuthVerify />

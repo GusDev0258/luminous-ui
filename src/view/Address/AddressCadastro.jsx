@@ -1,8 +1,8 @@
 import React from "react";
+import Select from 'react-select';
 import Header from "../utils/Header";
 import DefaultInput from "../utils/Form/DefaultInput";
 import DefaultCheckbox from "../utils/Form/DefaultCheckbox";
-import DefaultSelection from "../utils/Form/DefaultSelection";
 import axios from "axios";
 import useToken from "../../states/useToken";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +14,7 @@ const AddressCadastro = () => {
   const [cep, setCep] = React.useState("");
   const [houseNumber, setHouseNumber] = React.useState("");
   const [inputVoltage, setInputVoltage] = React.useState("110");
+  const [inputProvider, setInputProvider] = React.useState("CELESC");
   const [street, setStreet] = React.useState("");
   const [neighborhood, setNeighborhood] = React.useState("");
   const [state, setState] = React.useState("");
@@ -22,7 +23,8 @@ const AddressCadastro = () => {
 
   const [selectedValue, setSelectedValue] = React.useState("");
   
-  const options = [110, 220];
+  const optVoltage = [110, 220];
+  const optProvider = ["CELESC"];
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
@@ -42,7 +44,7 @@ const AddressCadastro = () => {
         inputVoltage,
         street,
         neighborhood,
-        energyProviderId: 70,
+        energyProviderId: 9,
         state,
         nickname,
         mainAddress
@@ -120,33 +122,83 @@ return (
         <DefaultInput
           label={"Nome"}
           labelClassName={"default-input-label"}
-          className="nickname-input default-form-input"
+          className="inputProvide-input default-form-input"
           id="nickname"
           type="text"
           value={nickname}
           setValue={setNickname}
         /> 
 
-        <div>
-          <DefaultSelection
-            label={"Voltagem"}
-            labelClassName={"default-input-label"}
-            className="inputVoltage-input default-form-input"
-            id="selectionId"
-            value={inputVoltage}
-            setValue={setInputVoltage}
-            options={options}
-          />  
-        </div>
+        <div className="default-form-input">
+            <label htmlFor="inputVoltage" className="default-input-label">
+              Voltagem
+            </label>
+            <Select
+              id="inputVoltage"
+              value={{ value: inputVoltage, label: inputVoltage }}
+              onChange={selectedOption =>
+                setInputVoltage(selectedOption.value)
+              }
+              classNamePrefix="custom-select"
+              className="custom-select-control"
+              placeholderClassName="custom-select-placeholder"
+              isSearchable={false}
+              options={optVoltage.map(option => ({
+                value: option,
+                label: option
+              }))}
+              theme={theme => ({
+                ...theme,
+                colors: {
+                  ...theme.colors,
+                  primary: "#ca8a04", // Cor da borda
+                  primary25: "#f5f5f5" // Cor de fundo das opções ao passar o mouse
+                }
+              })}
+            />
+          </div>
 
-        <DefaultCheckbox 
-           label={"Endereço Principal"}
-           labelClassName={"default-input-label"}
-           id="mainAddress"
-           value={mainAddress}
-           onCheckedChange={setMainAddress}
-        />
-        
+        <div className="default-form-input">
+            <label htmlFor="inputProvider" className="default-input-label">
+              Distribuidora
+            </label>
+            <Select
+              id="inputProvider"
+              value={{ value: inputProvider, label: inputProvider }}
+              onChange={selectedOption =>
+                setInputProvider(selectedOption.value)
+              }
+              classNamePrefix="custom-select"
+              className="custom-select-control"
+              placeholderClassName="custom-select-placeholder"
+              isSearchable={false}
+              options={optProvider.map(option => ({
+                value: option,
+                label: option
+              }))}
+              theme={theme => ({
+                ...theme,
+                colors: {
+                  ...theme.colors,
+                  primary: "#ca8a04", // Cor da borda
+                  primary25: "#f5f5f5" // Cor de fundo das opções ao passar o mouse
+                }
+              })}
+            />
+          </div>
+
+          <div className="default-form-input">
+            <label htmlFor="mainAddress" className="default-input-label custom-checkbox-label">
+              Endereço Principal
+            </label>
+            <DefaultCheckbox
+              id="mainAddress"
+              value={mainAddress}
+              onCheckedChange={setMainAddress}
+              className="custom-checkbox-input"
+            />
+          </div>
+
           <button type="submit" className="primary-button btn-endereco">
             Cadastrar
           </button>
