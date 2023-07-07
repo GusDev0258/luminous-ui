@@ -85,7 +85,7 @@ const AddressConsumptionReport = () => {
           className="custom-select-control"
           placeholderClassName="custom-select-placeholder"
           isSearchable={false}
-          options={["KWH", "CRs"].map(option => ({
+          options={["KWH", "R$"].map(option => ({
             value: option,
             label: option
           }))}

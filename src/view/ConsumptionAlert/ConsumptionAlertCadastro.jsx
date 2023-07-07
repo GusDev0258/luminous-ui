@@ -112,7 +112,7 @@ const ConsumptionAlertCadastro = () => {
               setValue={setConsumptionLimit}
             />
             <button type="submit" className="primary-button btn-fatura">
-              Cadastrar
+              Atualizar
             </button>
           </form>
         </section>

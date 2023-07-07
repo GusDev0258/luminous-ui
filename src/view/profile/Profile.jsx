@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import DeleteModal from "./DeleteModal";
 import ProfilePic from '../../images/angela.png';
+import Header from "../utils/Header";
 
 export default function Profile() {
   const { token, payload } = useToken();
@@ -49,11 +50,10 @@ export default function Profile() {
   } else {
     return (
       <Fragment>
+        <Header textContent={"Meu Perfil"} />
         <div className="default-form-container">
-
-        <h1>Meu Perfil</h1>
         <img src={ProfilePic} alt="Foto de perfil" className="profile-pic" style={{borderRadius: '50%', marginTop: '8px'}}/>
-        <h1 className="primary-title">{user.userName}</h1>
+        <h1 className="primary-title"style={{padding: 0, margin: 0, marginBottom: 4}}> {user.userName}</h1>
         <h2>Informações do usuário</h2>
           <form onSubmit={handleSubmit((e) => updateUserData(e))}>
             <label className="control-label">
@@ -101,7 +101,7 @@ export default function Profile() {
                 })}
               />
             </label>
-            <button type="submit">Atualizar dados</button>
+            <button type="submit" style={{background: 'transparent', border: '1px solid #000', padding: 6, borderRadius: 4}}>Atualizar dados</button>
           </form>
         </div>
         <DeleteModal />

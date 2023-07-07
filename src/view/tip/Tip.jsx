@@ -10,7 +10,7 @@ const Tip = () => {
     document.title = 'Dicas | Luminous';
     setTimeout(() => {
       navigate('/');
-    }, 60000);
+    }, 10000);
   },[])
 
   return (

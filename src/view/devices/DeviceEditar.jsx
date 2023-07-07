@@ -4,8 +4,6 @@ import DefaultInput from "../utils/Form/DefaultInput";
 import { useParams, useNavigate } from "react-router-dom";
 import useToken from "../../states/useToken";
 import { updateDevice, getDevicesOfAddress } from "../../api/FetchDevices";
-import { CurrentAddressContext } from "../../states/CurrentAddressContext";
-import { BASE_URL } from "../../api/DefaultUrl";
 
 const DeviceEditar = () => {
   const { id, addressId } = useParams();
@@ -40,7 +38,7 @@ const DeviceEditar = () => {
         power,
         usageTime
       }, addressId);
-      navigate(`/`);
+      navigate(`/devices`);
     } catch (error) {
       console.error("Error updating Device:", error);
     }

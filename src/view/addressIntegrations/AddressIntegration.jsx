@@ -5,13 +5,12 @@ import '../../css/Integration/integration.css';
 import {getAddressById} from '../../api/FetchAddress';
 import useToken from "../../states/useToken";
 import { CurrentAddressContext } from '../../states/CurrentAddressContext';
-import { getCurrentConsumption } from "../../api/FetchConsumptionTrack";
 import { useParams } from 'react-router';
 
 const AddressIntegration = () => {
   
   var {addressId} = useParams();
-  console.log(addressId);
+
 
   const { currentAddress, setCurrentAddress } = React.useContext(
     CurrentAddressContext

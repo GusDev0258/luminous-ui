@@ -48,10 +48,8 @@ export async function deleteAddressesOfUser(token, id, addressId) {
   });
 
   if (response.ok) {
-    // Exclusão bem-sucedida
     return true;
   } else {
-    // Tratar erros de exclusão
     const errorData = await response.json();
     throw new Error(errorData.message || "Erro ao excluir endereço do usuário");
   }
@@ -79,7 +77,6 @@ export async function updateAddressById(token, userId, addressId, addressData) {
 }
 
 export async function getReportAddressById(token, addressId) {
-  
   try {
     const response = await fetch(`${BASE_URL}report/address/${addressId}`, {
       method: "GET",

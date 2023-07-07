@@ -5,6 +5,7 @@ import { Chart } from "react-chartjs-2";
 import { useEffect, useState } from "react";
 import Loading from "../loading/Loading";
 import { getWhiteTaxes } from "../../api/FetchWhiteTaxes";
+import Header from "../utils/Header";
 
 const RED_COLOR = "#FF0F00";
 const YELLOW_COLOR = "#FFC700";
@@ -141,6 +142,7 @@ export default function WhiteTax() {
   } else {
     return (
       <div>
+        <Header textContent={"Tarifas Brancas"}/>
         <form>
           <select
             onChange={(e) => handleChange(e)}
@@ -148,6 +150,7 @@ export default function WhiteTax() {
             value={selectedItem}
             className="default-form-input"
             placeholder="Selecione uma distribuidora"
+            style={{marginTop: '16px'}}
           >
             <option value="Selecione uma distribuidora">
               Selecione uma distribuidora

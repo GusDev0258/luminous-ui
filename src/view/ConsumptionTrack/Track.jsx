@@ -17,11 +17,9 @@ const ConsumptionTrack = () => {
     const [consumption, setConsumption] = useState();
     
     const { token } = useToken();
-
-    console.log(token, currentAddress[0]["id"]);
     if (!consumption) {
         (async () => {
-          const data = await getCurrentConsumption(token, currentAddress[0]["id"]);
+          const data = await getCurrentConsumption(token, currentAddress["id"]);
 
           setConsumption(data);
         })();
@@ -37,7 +35,6 @@ const ConsumptionTrack = () => {
                 let largura = (300*energyConsumptionKWh)/lastMonthCons
                 element.style.width = largura + "%";
             }
-
         return(
             <Fragment>
             <div>

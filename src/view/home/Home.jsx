@@ -15,7 +15,7 @@ export default function Home() {
   useEffect(() => {
     document.title = "Minhas Residências | Luminous";
     async function requestAddresses() {
-      console.log(payload);
+
       const response = await getAddressByUser(token, payload);
       return response;
     }
@@ -35,13 +35,13 @@ export default function Home() {
       <Header textContent={"Minhas Residências"} />
       <section className="default-item-container">
       {addresses.length > 0 && (
-      
       <nav className="default-item-nav">
         <ul className="default-item-list">{addresses.map((address) => (
       
           <AddressItem
             id={address.id}
             city={address.city}
+            nickname={address.nickname}
             houseNumber={address.houseNumber}
             inputVoltage={address.inputVoltage}
             neighborhood={address.neighborhood}

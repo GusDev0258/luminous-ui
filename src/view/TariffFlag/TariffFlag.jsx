@@ -34,7 +34,7 @@ export default function TariffFlag () {
               <Header textContent={"Bandeira tarifária"} />
               </div>
                 
-              <div class="flexFlag"> 
+              <div className="flexFlag"> 
               <Flag size={90} color={flagColor()} /> 
               </div>
               <div class="typography-tf">

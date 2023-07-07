@@ -27,7 +27,7 @@ export default function Devices() {
 
     if (!devices) {
         (async () => {
-          const data = await getDevicesOfAddress(token, currentAddress[0]["id"]);
+          const data = await getDevicesOfAddress(token, currentAddress["id"]);
           setDevices(data);
         })();
         return <Loading />;
@@ -40,7 +40,7 @@ export default function Devices() {
 
                     <DeviceItem
                     id={device.id}
-                    addressId={currentAddress[0]["id"]}
+                    addressId={currentAddress["id"]}
                     name={device.name}
                     power={device.power}
                     consumptionKWh={device.consumptionKWh.toFixed(2)}
