@@ -48,13 +48,13 @@ const AddressIntegration = () => {
       <Header textContent="Integrações" />
       <section className="integration-container">
         <ul className="integration-list">
-          <Integration url={`/energyBill/`} text="Faturas"/>
-          <Integration url={`/consumption-alert/`} text="Alertas de consumo"/>
-          <Integration url={`/devices/?address=${addressId}`} text="Equipamentos"/>
-          <Integration url={`/consumptionTrack/address/${addressId}`} text="Acompanhar consumo"/>
-          <Integration url={urlMaintenance} text="Consultar manutenção na rede elétrica"/>
-          <Integration url={urlEnergyFall} text="Consultar falta de energia"/>
-          <Integration url={`/report/address/${addressId}`} text="Relatórios"/>
+          <Integration url={`/energyBill/`} text="Faturas" id="bills"/>
+          <Integration url={`/consumption-alert/`} text="Alertas de consumo" id="alerts"/>
+          <Integration url={`/devices/?address=${addressId}`} text="Equipamentos" id="devices"/>
+          <Integration url={`/consumptionTrack/address/${addressId}`} text="Acompanhar consumo" id="track"/>
+          <Integration url={urlMaintenance} text="Consultar manutenção na rede elétrica" id="maintence"/>
+          <Integration url={urlEnergyFall} text="Consultar falta de energia" id="energyFall"/>
+          <Integration url={`/report/address/${addressId}`} text="Relatórios" id="report"/>
         </ul>
       </section>
     </>

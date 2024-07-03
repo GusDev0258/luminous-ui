@@ -17,23 +17,25 @@ const DeviceCadastro = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await axios
-      .post(
-        `${BASE_URL}device/address/${currentAddress.id}`,
-        {
-          name,
-          power,
-          usageTime,
-        },
-        {
-          headers: {
-            authorization: `Bearer ${token}`,
-            Accept: "application/json",
-            "Content-type": "application/json",
+    if (name !== " " && power !== " " && usageTime !== " ") {
+      await axios
+        .post(
+          `${BASE_URL}device/address/${currentAddress.id}`,
+          {
+            name,
+            power,
+            usageTime,
           },
-        }
-      )
-      .then(() => navigate(`/devices`));
+          {
+            headers: {
+              authorization: `Bearer ${token}`,
+              Accept: "application/json",
+              "Content-type": "application/json",
+            },
+          }
+        )
+        .then(() => navigate(`/devices/?address=${currentAddress.id}`));
+    }
   };
   return (
     <div>

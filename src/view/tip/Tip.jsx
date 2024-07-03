@@ -8,9 +8,6 @@ const Tip = () => {
 
   React.useEffect(() => {
     document.title = 'Dicas | Luminous';
-    setTimeout(() => {
-      navigate('/');
-    }, 10000);
   },[])
 
   return (
